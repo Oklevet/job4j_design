@@ -40,7 +40,7 @@ public class Person {
     @Override
     public String toString() {
         return  getClass().getSimpleName() + "{"
-                + "name='" + getAge() + '\''
+                + "name='" + getName() + '\''
                 + "age='" + getAge() + '\''
                 + "birthday='" + getBirthday() + '\''
                 + '}';
