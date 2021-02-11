@@ -4,67 +4,51 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-public class SimpleArray<T> implements Iterator<T> {
+public class SimpleArray<T> implements Iterable<T> {
     private final T[] arr;
-    private final T[] exmpl;
-    private int indexIter = -1;
+    private int position = 0;
 
     public SimpleArray(int num) {
         this.arr = (T[]) new Object[num];
-        this.exmpl = (T[]) new Object[1];
     }
 
     @Override
-    public boolean hasNext() {
-        return indexIter < arr.length - 1;
-    }
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            int indexIter = 0;
 
-    @Override
-    public T next() {
-        if (!hasNext()) {
-            throw new NoSuchElementException();
-        }
-        indexIter++;
-        return arr[indexIter];
+            @Override
+            public boolean hasNext() {
+                return indexIter < position;
+            }
+
+            @Override
+            public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+            return arr[indexIter++];
+            }
+        };
     }
 
     public void add(T model) {
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == exmpl[0]) {
-                arr[i] = model;
-                return;
-            }
-        }
-        throw new IndexOutOfBoundsException("Array is full. Go away, please.");
+        arr[position++] = model;
     }
 
-    public void set(int index, T model) {
-        try {
-            Objects.checkIndex(index, arr.length);
-        } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("The entered index is outside the array. "
-                    + "Array length is " + arr.length);
-        }
+    public void set(int index, T model) throws IndexOutOfBoundsException {
+        Objects.checkIndex(index, position);
         arr[index] = model;
     }
 
     public void remove(int index) {
-        try {
-            Objects.checkIndex(index, arr.length);
-        } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("The entered index is outside the array. "
-                    + "Array length is " + arr.length);
-        }
-        System.arraycopy(arr, index + 1, arr, index, arr.length - index);
+        Objects.checkIndex(index, arr.length);
+        System.arraycopy(arr, index + 1, arr, index, arr.length - index - 1);
+        arr[this.position - 1] = null;
     }
 
-    public T get(int index) {
-        try {
-            Objects.checkIndex(index, arr.length);
-        } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("The entered index is outside the array. "
-                    + "Array length is " + arr.length);
-        }
+    public T get(int index) throws IndexOutOfBoundsException {
+        Objects.checkIndex(index, position);
         return (T) arr[index];
     }
 }
