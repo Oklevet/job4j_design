@@ -44,7 +44,7 @@ public class SimpleArray<T> implements Iterable<T> {
     public void remove(int index) {
         Objects.checkIndex(index, arr.length);
         System.arraycopy(arr, index + 1, arr, index, arr.length - index - 1);
-        arr[this.position - 1] = null;
+        arr[--this.position] = null;
     }
 
     public T get(int index) throws IndexOutOfBoundsException {

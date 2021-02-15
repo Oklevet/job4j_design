@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertNull;
 
 public class SimpleArrayTest {
@@ -88,7 +89,7 @@ public class SimpleArrayTest {
          iterator.next();
     }
 
-     @Test
+     @Test (expected = IndexOutOfBoundsException.class)
     public void remove() {
         int[] expected = new int[] {1, 3, 4};
         SimpleArray rsl = new SimpleArray(4);
