@@ -24,7 +24,7 @@ public class SimpleLinked<T> implements Iterable<T> {
     }
 
     public T get(int index) {
-        Objects.checkIndex(index,size);
+        Objects.checkIndex(index, size);
         Node<T> curr = first;
         for (int i = 0; i < size; i++) {
             if (i == index) {
