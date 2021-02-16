@@ -42,9 +42,10 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void remove(int index) {
-        Objects.checkIndex(index, arr.length);
+        Objects.checkIndex(index, position);
         System.arraycopy(arr, index + 1, arr, index, arr.length - index - 1);
-        arr[--this.position] = null;
+        position--;
+        arr[this.position] = null;
     }
 
     public T get(int index) throws IndexOutOfBoundsException {
