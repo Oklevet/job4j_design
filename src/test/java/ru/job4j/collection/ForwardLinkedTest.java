@@ -44,4 +44,12 @@ public class ForwardLinkedTest {
         assertThat(linked.deleteLast(), is(2));
         linked.forEach(System.out::println);
     }
+
+     @Test
+    public void whenOneLengthDeleteLast() {
+        ForwardLinked<Integer> linked = new ForwardLinked<>();
+        linked.add(1);
+        assertThat(linked.deleteLast(), is(1));
+        linked.forEach(System.out::println);
+    }
 }
