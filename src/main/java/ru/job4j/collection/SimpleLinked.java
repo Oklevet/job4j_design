@@ -15,7 +15,9 @@ public class SimpleLinked<T> implements Iterable<T> {
         Node<T> node = new Node<T>(null, null, model);
         if (size == 0) {
             first = node;
+            //last = node;
         } else {
+            //last.prev = last;
             last.next = node;
         }
         last = node;
@@ -26,13 +28,10 @@ public class SimpleLinked<T> implements Iterable<T> {
     public T get(int index) {
         Objects.checkIndex(index, size);
         Node<T> curr = first;
-        for (int i = 0; i < size; i++) {
-            if (i == index) {
-                return curr.elem;
-            }
+        for (int i = 0; i < index; i++) {
             curr = curr.next;
         }
-        return null;
+        return curr.elem;
     }
 
     @Override
@@ -47,7 +46,7 @@ public class SimpleLinked<T> implements Iterable<T> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return indexIter.next != null;
+                return indexIter != null;
             }
 
             @Override
