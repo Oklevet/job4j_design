@@ -20,6 +20,17 @@ public class SimpleArrayTest {
     }
 
     @Test
+    public void whenFewAddThenGet() {
+        SimpleArray<String> array = new SimpleArray<>();
+        array.add("first");
+        array.add("sec");
+        array.add("third");
+        array.add("fourth");
+        String rsl = array.get(3);
+        assertThat(rsl, is("fourth"));
+    }
+
+    @Test
     public void whenAddThenIt() {
         SimpleArray<String> array = new SimpleArray<>();
         array.add("first");
