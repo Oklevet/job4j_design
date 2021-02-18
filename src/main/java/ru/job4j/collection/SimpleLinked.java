@@ -12,7 +12,7 @@ public class SimpleLinked<T> implements Iterable<T> {
     private int size = 0;
 
     public void add(T model) {
-        Node<T> node = new Node<T>(null, null, model);
+        Node<T> node = new Node<T>(null, last, model);
         if (size == 0) {
             first = node;
             //last = node;
