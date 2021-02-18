@@ -36,7 +36,7 @@ public class ListUtils {
                 i.remove();
             }
         }
-        return null;
+        return list;
     }
 
     public static <T> List<T> replaceIf(List<T> list, Predicate<T> filter, T value) {
@@ -47,7 +47,7 @@ public class ListUtils {
                 i.add(value);
             }
         }
-        return null;
+        return list;
     }
 
     public static <T> List<T> removeAll(List<T> list, List<T> elements) {
@@ -57,6 +57,6 @@ public class ListUtils {
                 i.remove();
             }
         }
-        return null;
+        return list;
     }
 }
