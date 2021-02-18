@@ -9,7 +9,7 @@ public class SimpleArray<T> implements Iterable<T> {
     private int modCount = 0;
 
     public SimpleArray() {
-        this.arr = (T[]) new Object[0];
+        this.arr = (T[]) new Object[10];
     }
 
     public T get(int index) throws IndexOutOfBoundsException {
@@ -23,12 +23,15 @@ public class SimpleArray<T> implements Iterable<T> {
         if (arr.length < 1) {
             newArr[0] = model;
             arr = Arrays.copyOf(newArr, 1);
+            position++;
         } else {
-            arr = Arrays.copyOf(arr, arr.length + 1);
-            arr[arr.length - 1] = model;
+            if (arr.length == position) {
+                arr = Arrays.copyOf(arr, arr.length + 10);
+            }
+            arr[position] = model;
         }
-        modCount++;
         position++;
+        modCount++;
     }
 
     @Override
