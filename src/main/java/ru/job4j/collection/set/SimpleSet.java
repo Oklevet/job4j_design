@@ -8,13 +8,20 @@ public class SimpleSet<T> implements Iterable<T> {
     private SimpleArray<T> array = new SimpleArray();
 
     public boolean add(T module) {
+        if (!contains(module)) {
+            array.add(module);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean contains(T value) {
         for (T t : array) {
-            if (t == module) {
-                return false;
+            if (t.equals(value)) {
+                return true;
             }
         }
-        array.add(module);
-        return true;
+        return false;
     }
 
     @Override
