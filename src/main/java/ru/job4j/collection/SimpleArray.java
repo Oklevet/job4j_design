@@ -19,18 +19,10 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void add(T model) {
-        T[] newArr = (T[]) new Object[arr.length + 1];
-        if (arr.length < 1) {
-            newArr[0] = model;
-            arr = Arrays.copyOf(newArr, 1);
-            position++;
-        } else {
-            if (arr.length == position) {
-                arr = Arrays.copyOf(arr, arr.length + 10);
-            }
-            arr[position] = model;
+        if (position > arr.length) {
+            arr = Arrays.copyOf(arr, arr.length * 2);
         }
-        position++;
+        arr[position++] = model;
         modCount++;
     }
 
