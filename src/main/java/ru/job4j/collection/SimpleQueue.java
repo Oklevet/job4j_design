@@ -11,6 +11,7 @@ public class SimpleQueue<T> {
             while (sizeIn > 0) {
                 out.push(in.pop());
                 sizeOut++;
+                sizeIn--;
             }
         }
         sizeOut--;
