@@ -19,7 +19,7 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void add(T model) {
-        if (position > arr.length) {
+        if (position == arr.length) {
             arr = Arrays.copyOf(arr, arr.length * 2);
         }
         arr[position++] = model;
