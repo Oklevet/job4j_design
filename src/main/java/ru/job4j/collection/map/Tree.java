@@ -3,6 +3,7 @@ package ru.job4j.collection.map;
 import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;
+import java.util.function.Predicate;
 
 class Tree<E> implements SimpleTree<E> {
     private final Node<E> root;
@@ -21,6 +22,17 @@ class Tree<E> implements SimpleTree<E> {
             }
         }
         return false;
+    }
+
+    public boolean isBinary() {
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(this.root);
+        while (!queue.isEmpty()) {
+            if (queue.poll().getChildren().size() > 2) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
