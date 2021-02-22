@@ -20,9 +20,9 @@ public class Analize {
         for (User u : current) {
             user = map.remove(u.id);
             if (user != null) {
-                if (!(user.name.equals(u.name)) && user.id == u.id) {
+                if (!(user.equals(u))) {
                     changed++;
-                } else if (user.name.equals(u.name) && user.id == u.id) {
+                } else if (user.equals(u)) {
                     notModify++;
                 }
             }
