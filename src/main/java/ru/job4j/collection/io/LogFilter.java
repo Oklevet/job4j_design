@@ -28,11 +28,11 @@ public class LogFilter {
             //PrintWriter output = new PrintWriter(new BufferedOutputStream(new FileOutputStream(file)));
             //BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file));
             FileOutputStream output = new FileOutputStream(file);
-//            for (String s : log) {
-//                output.write(s.getBytes(StandardCharsets.UTF_8));
-//                output.write(13);
-//                output.write(10);
-//            }
+            for (String s : log) {
+                output.write(s.getBytes(StandardCharsets.UTF_8));
+                output.write(13);
+                output.write(10);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
