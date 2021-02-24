@@ -1,18 +1,14 @@
 package ru.job4j.collection.io;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LogFilter {
     public static List<String> filter(String file) {
         List<String> list = new ArrayList<>();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             list = reader
                     .lines()
                     .filter(s -> s.contains(" 404 "))
@@ -24,14 +20,10 @@ public class LogFilter {
     }
 
     public static void save(List<String> log, String file) {
-        try {
-            //PrintWriter output = new PrintWriter(new BufferedOutputStream(new FileOutputStream(file)));
-            //BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file));
-            FileOutputStream output = new FileOutputStream(file);
+        try (PrintWriter output = new PrintWriter(new BufferedOutputStream(new FileOutputStream(file)))) {
             for (String s : log) {
-                output.write(s.getBytes(StandardCharsets.UTF_8));
-                output.write(13);
-                output.write(10);
+                output.println(s);
+                output.flush();
             }
         } catch (Exception e) {
             e.printStackTrace();
