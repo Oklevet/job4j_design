@@ -17,12 +17,12 @@ public class ConfigTest {
         config.toString();
         assertThat(config.value("name"), is("Petr Arsentev"));
         assertThat(config.value("qwe"), is("qweqwe"));
-        //assertThat(config.value("asdasd"), is("1a23"));
+        assertThat(config.value("asdasd"), is("1a23"));
     }
 
     //Тест не отработал
     @Test (expected = IllegalArgumentException.class)
-    public void whenPairWithWorngEquality() {
+    public void whenPairWithWrongEquality() {
         String path = "configWrongEqual.txt";
         Config config = new Config(path);
         config.load();
