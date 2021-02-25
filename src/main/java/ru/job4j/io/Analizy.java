@@ -2,6 +2,7 @@ package ru.job4j.io;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,32 +10,34 @@ import static java.util.function.Predicate.not;
 
 public class Analizy {
     public void unavailable(String source, String target) {
-        List<String> list = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(source))) {
-            list = reader
-                    .lines()
-                    .filter(s -> !(s.isEmpty()))
-                    .collect(Collectors.toList());
+            List<String> finalList = new ArrayList<>();
+            String timeFirst = "";
+            List<String> list = reader
+                                    .lines()
+                                    .filter(s -> !s.isEmpty())
+                                    .collect(Collectors.toList());
+            for (String s : list) {
+                String[] strs = s.split(" ");
+                if ((s.startsWith("400") || s.startsWith("500")) && timeFirst.isEmpty()) {
+                    timeFirst = strs[1] + ";";
+                } else if (!(s.startsWith("400") || s.startsWith("500")) && timeFirst.endsWith(";")) {
+                    finalList.add(timeFirst + strs[1]);
+                    timeFirst = "";
+                }
+            }
+            if (!timeFirst.isEmpty()) {
+                finalList.add(timeFirst + " still not working");
+            }
+            writeToFile(finalList, target);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        try (PrintWriter output = new PrintWriter(new BufferedOutputStream(new FileOutputStream(target)))) {
-            String timeFirst = "";
-            for (int i = 0; i < list.size(); i++) {
-                String[] s = list.get(i).split(" ");
-                if ((s[0].equals("400") || s[0].equals("500")) && timeFirst.isEmpty()) {
-                    timeFirst = s[1];
-                } else if (!(s[0].equals("400") || s[0].equals("500")) && !timeFirst.isEmpty()) {
-                    String outer = timeFirst + ";" + s[1];
-                    output.println(outer);
-                    timeFirst = "";
-                }
+    }
 
-            }
-            if (!timeFirst.isEmpty()) {
-                output.print(timeFirst);
-                output.println("; still not working");
-            }
+    public void writeToFile(List<String> list, String target) {
+        try (PrintWriter output = new PrintWriter(new BufferedOutputStream(new FileOutputStream(target)))) {
+            list.stream().forEach(s -> output.println(s));
         } catch (Exception e) {
             e.printStackTrace();
         }
