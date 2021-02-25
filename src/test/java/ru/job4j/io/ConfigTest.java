@@ -20,7 +20,6 @@ public class ConfigTest {
         assertThat(config.value("asdasd"), is("1a23"));
     }
 
-    //Тест не отработал
     @Test (expected = IllegalArgumentException.class)
     public void whenPairWithWrongEquality() {
         String path = "configWrongEqual.txt";
