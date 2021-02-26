@@ -2,22 +2,14 @@ package ru.job4j.io;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.util.function.Predicate.not;
 
 public class Analizy {
     public void unavailable(String source, String target) {
         try (BufferedReader reader = new BufferedReader(new FileReader(source))) {
             List<String> finalList = new ArrayList<>();
             String timeFirst = "";
-            List<String> list = reader
-                                    .lines()
-                                    .filter(s -> !s.isEmpty())
-                                    .collect(Collectors.toList());
-            for (String s : list) {
+            for (String s = reader.readLine(); s != null; s = reader.readLine()) {
                 String[] strs = s.split(" ");
                 if ((s.startsWith("400") || s.startsWith("500")) && timeFirst.isEmpty()) {
                     timeFirst = strs[1] + ";";
