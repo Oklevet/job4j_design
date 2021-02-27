@@ -14,16 +14,16 @@ public class AnalizeTest {
     @Test
     public void whenChanAddDel() {
         List<Analize.User> prev = List.of(
-                new Analize.User(1,"qwe"),
-                new Analize.User(2,"qweqwe"),
-                new Analize.User(3,"asd"),
-                new Analize.User(4,"asdasd")
+                new Analize.User(1, "qwe"),
+                new Analize.User(2, "qweqwe"),
+                new Analize.User(3, "asd"),
+                new Analize.User(4, "asdasd")
         );
         List<Analize.User> curr = List.of(
-                new Analize.User(1,"qwezxc"),
-                new Analize.User(3,"jkljkl"),
-                new Analize.User(5,"erterte"),
-                new Analize.User(6,"asdasd")
+                new Analize.User(1, "qwezxc"),
+                new Analize.User(3, "jkljkl"),
+                new Analize.User(5, "erterte"),
+                new Analize.User(6, "asdasd")
         );
         Analize.Info rsl = new Analize.Info(Analize.diff(prev, curr));
         Analize.Info expected = new Analize.Info(2, 2, 2);
@@ -33,16 +33,16 @@ public class AnalizeTest {
     @Test
     public void whenDel() {
         List<Analize.User> prev = List.of(
-                new Analize.User(1,"qwe"),
-                new Analize.User(2,"qweqwe"),
-                new Analize.User(3,"asd"),
-                new Analize.User(4,"asdasd")
+                new Analize.User(1, "qwe"),
+                new Analize.User(2, "qweqwe"),
+                new Analize.User(3, "asd"),
+                new Analize.User(4, "asdasd")
         );
         List<Analize.User> curr = List.of(
-                new Analize.User(1,"qwe"),
-                new Analize.User(2,"qweqwe"),
-                new Analize.User(3,"asd"),
-                new Analize.User(4,"asdasd")
+                new Analize.User(1, "qwe"),
+                new Analize.User(2, "qweqwe"),
+                new Analize.User(3, "asd"),
+                new Analize.User(4, "asdasd")
         );
         Analize.Info rsl = new Analize.Info(Analize.diff(prev, curr));
         Analize.Info expected = new Analize.Info(0, 0, 0);
