@@ -8,8 +8,14 @@ import java.util.List;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get(".");
-        search(start, "js").forEach(System.out::println);
+        if (args.length != 2) {
+            throw new IllegalArgumentException("Wrong quantity of numbers. Expected 2.");
+        }
+        Path start = Paths.get(args[0]);
+        if (!start.toFile().exists()) {
+            throw new IllegalArgumentException("File is not exist.   " + start.toAbsolutePath());
+        }
+        search(start, args[1]).forEach(System.out::println);
     }
 
     public static List<Path> search(Path root, String ext) throws IOException {
