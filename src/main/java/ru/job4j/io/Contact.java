@@ -5,17 +5,17 @@ import java.io.*;
 public class Contact implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private final int zipCode;
+    //private final int zipCode;
     private final String phone;
 
-    public Contact(int zipCode, String phone) {
-        this.zipCode = zipCode;
+    public Contact(String phone) {
+//        this.zipCode = zipCode;
         this.phone = phone;
     }
 
-    public int getZipCode() {
-        return zipCode;
-    }
+//    public int getZipCode() {
+//        return zipCode;
+//    }
 
     public String getPhone() {
         return phone;
@@ -24,13 +24,13 @@ public class Contact implements Serializable {
     @Override
     public String toString() {
         return "Contact{"
-                + "zipCode=" + zipCode
+     //           + "zipCode=" + zipCode
                 + ", phone='" + phone + '\''
                 + '}';
     }
 
     public static void main(String[] args) {
-        Contact contact = new Contact(12312, "05300158392");
+        Contact contact = new Contact("05300158392");
         try (FileOutputStream fos = new FileOutputStream("./src/data/tempServer.out")) {
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(contact);
