@@ -9,7 +9,8 @@ import java.util.*;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     Map<String, Set<FileProperty>> map = new HashMap<>();
-    Map<String, Set<FileProperty>> mapOfDuplicate = new HashMap<>();
+    List<FileProperty> mapOfDuplicate = new ArrayList<>();
+
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         String name = file.toFile().getName();
@@ -17,13 +18,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
         FileProperty fileProperty = new FileProperty(size, name);
         if (map.containsKey(name)) {
             if (map.get(name).contains(fileProperty)) {
-                if (mapOfDuplicate.containsKey(name)) {
-                    mapOfDuplicate.get(name).add(fileProperty);
-                } else {
-                    var arr = new HashSet<FileProperty>();
-                    arr.add(fileProperty);
-                    mapOfDuplicate.put(name, arr);
-                }
+                mapOfDuplicate.add(fileProperty);
             } else {
                 map.get(name).add(fileProperty);
             }
@@ -32,7 +27,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
             arr.add(fileProperty);
             map.put(name, arr);
         }
-        mapOfDuplicate.forEach((s, longs) -> System.out.println(s + "  " + longs.size()));
+        mapOfDuplicate.forEach(s -> s.toString());
         return super.visitFile(file, attrs);
     }
 }

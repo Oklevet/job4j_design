@@ -44,4 +44,12 @@ public class FileProperty {
     public int hashCode() {
         return Objects.hash(size, name);
     }
+
+    @Override
+    public String toString() {
+        return "File {"
+                + "name = '" + name + '\''
+                + ", size = " + size
+                + '}';
+    }
 }
