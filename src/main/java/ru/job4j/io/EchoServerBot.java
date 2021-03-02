@@ -20,29 +20,34 @@ public class EchoServerBot {
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
                     String str = in.readLine();
+                    StringBuilder response = new StringBuilder();
+                    boolean work = true;
                     while (!str.isEmpty()) {
-                        if (str.startsWith("GET")) {
+                        System.out.println(str);
+                        if (str.startsWith("GET") && str.contains("=")) {
                             String[] arrStr = str.split("=");
                             String s = arrStr[1].substring(0, arrStr[1].indexOf(" "));
                             switch (s) {
                                 case ("Hello"):
-                                    out.write("Hello, dear friend.\r\n\r\n".getBytes());
-                                    System.out.println("Hello, dear friend.");
+                                    response.append("Hello, dear friend");
                                     break;
                                 case ("Exit"):
-                                    out.write("Завершить работу сервера.\r\n\r\n".getBytes());
-                                    System.out.println("Завершить работу сервера.");
-                                    server.close();
+                                    response.append("Завершить работу сервера.");
+                                    work = false;
                                     break;
                                 default:
-                                    out.write(s.getBytes());
-                                    System.out.println(s);
+                                    response.append("Введенная команда не распознана.");
                                     break;
                             }
                         }
                         str = in.readLine();
                     }
-                    out.write("HTTP/1.1 200 OK\r\n".getBytes());
+                    System.out.println(response.toString());
+                    out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                    out.write((response.toString() + "\r\n").getBytes());
+                    if (!work) {
+                        server.close();
+                    }
                 } catch (Exception e) {
                     LOG.error("Exception in log example", e);
                 }
