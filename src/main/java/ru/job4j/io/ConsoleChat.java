@@ -20,6 +20,7 @@ public class ConsoleChat {
 
     public void run() {
         List<String> answers = new ArrayList<>();
+        List<String> dialog = new ArrayList<>();
         try (BufferedReader fileAns = new BufferedReader(new FileReader(botAnswers))) {
             String s;
             while ((s = fileAns.readLine()) != null) {
@@ -33,7 +34,7 @@ public class ConsoleChat {
             BufferedReader chat = new BufferedReader(new InputStreamReader(System.in));
             String str = chat.readLine();
             while (!str.equals(OUT)) {
-                log.write(str + ENTER);
+                dialog.add(str + ENTER);
                 switch (str) {
                     case STOP:
                         continueAnswer = false;
@@ -47,9 +48,12 @@ public class ConsoleChat {
                 if (continueAnswer) {
                     String answer = answers.get((int) (Math.random() * (answers.size() - 1)));
                     System.out.println(answer);
-                    log.write(answer + ENTER);
+                    dialog.add(answer + ENTER);
                 }
                 str = chat.readLine();
+            }
+            for (String s : dialog) {
+                log.write(s);
             }
         } catch (Exception e) {
             e.printStackTrace();
