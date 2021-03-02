@@ -30,8 +30,7 @@ public class ConsoleChat {
             e.printStackTrace();
         }
 
-        try (BufferedWriter log = new BufferedWriter(new FileWriter(path))) {
-            BufferedReader chat = new BufferedReader(new InputStreamReader(System.in));
+       try (BufferedReader chat = new BufferedReader(new InputStreamReader(System.in))) {
             String str = chat.readLine();
             while (!str.equals(OUT)) {
                 dialog.add(str + ENTER);
@@ -52,12 +51,20 @@ public class ConsoleChat {
                 }
                 str = chat.readLine();
             }
-            for (String s : dialog) {
-                log.write(s);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+       printDialogListToLog(dialog);
+    }
+
+    public void printDialogListToLog(List<String> dialog) {
+         try (BufferedWriter log = new BufferedWriter(new FileWriter(path))) {
+             for (String s : dialog) {
+                 log.write(s);
+             }
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
     }
 
     public static void main(String[] args) {
