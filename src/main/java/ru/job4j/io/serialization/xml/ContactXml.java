@@ -1,9 +1,9 @@
 package ru.job4j.io.serialization.xml;
 
-import com.sun.xml.txw2.annotation.XmlElement;
+//import com.sun.xml.txw2.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlAttribute;
 
-@XmlElement(value = "contact")
+//@XmlElement(value = "contact")
 public class ContactXml {
 
     @XmlAttribute
