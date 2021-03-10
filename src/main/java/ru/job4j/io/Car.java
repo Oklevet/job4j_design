@@ -35,7 +35,7 @@ public class Car {
         final String carJson =
                 "{"
                         + "\"wheels\":4,"
-                        + "\"model\":model_S,"
+                        + "\"model\":\"model S\","
                         + "\"engine\":"
                         + "{"
                         + "\"model\":\"V8\""
