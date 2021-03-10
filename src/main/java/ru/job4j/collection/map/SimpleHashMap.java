@@ -3,8 +3,6 @@ package ru.job4j.collection.map;
 import java.util.*;
 
 public class SimpleHashMap<K, V> implements Iterable<K> {
-    private K key;
-    private V value;
     private int defaultCapacity = 16;
     private int size = 10;
     private int countMods = 0;
@@ -21,14 +19,13 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
                 break;
             }
         }
-        if (elems.length == size) {
-            arrExtend(elems);
-        }
         return inserted;
     }
 
-    public Map.Entry<K, V>[] arrExtend(Map.Entry<K, V>[] arr) {
-        return Arrays.copyOf(arr, size * 2);
+    private int hash(K key, Map.Entry[] map) {
+        int h = key.hashCode();
+        int result = map.length & (int) Math.pow(h, h >>> 16);
+        return result;
     }
 
     public V get(K key) {
