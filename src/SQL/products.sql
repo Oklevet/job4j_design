@@ -40,7 +40,7 @@ select *
 	from product p,
 		type t
 	where t.id = p.type_id
-		and t.name like '%ICECREAM%';
+		and t.name like upper('%icecream');
 
 select * 
 	from product 
@@ -71,10 +71,9 @@ select *
 	and t.name in ('CHEESE', 'MILK');
 
 -- Instead 10 was taken 3 to read visual changes in the query results.
-select * from 
-	(select t.name, count(p.type_id) quantity
+select t.name, count(p.type_id) quantity
 		from product p,
 			type t
 		where t.id = p.type_id
-		group by t.name) ss
-	where ss.quantity < 3
+		group by t.name
+		having count(p.type_id) < 3;
