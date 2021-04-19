@@ -30,10 +30,27 @@ public class ConfigTest {
 
     @Test
     public void whenPairWithComments() {
-        String path = "data/pair_without_comment.properties";
+        String path = "src/data/pair_without_comment.properties";
         Config config = new Config(path);
         config.load();
         config.toString();
         assertThat(config.value("name"), is("Petr Arsentev"));
+    }
+
+    @Test
+    public void whenPairWithoutComment() {
+        String path = "src/data/pair_without_comment.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("name"),is("Petr Arsentev"));
+   }
+
+    @Test
+    public void whenAppPostgresInData() {
+        String path = "src/data/app2.properties";
+        Config config = new Config(path);
+        config.load();
+        config.toString();
+        assertThat(config.value("login"), is("postgres"));
     }
 }
