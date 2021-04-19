@@ -19,13 +19,14 @@ insert into type(name) values ('MEAT');
 insert into type(name) values ('VANILLA ICECREAM');
 
 insert into product(name, type_id, expired_date, price) values ('Lamber', 1, '20/04/2021', 800);
-insert into product(name, type_id, expired_date, price) values ('Russian', 1, '10/05/2021', 500);
+insert into product(name, type_id, expired_date, price) values ('Russian', 1, '01/05/2021', 500);
 insert into product(name, type_id, expired_date, price) values ('Belster', 1, '20/05/2021', 1100);
 insert into product(name, type_id, expired_date, price) values ('NeMoloko', 2, '12/05/2021', 110);
 insert into product(name, type_id, expired_date, price) values ('Pralamat', 2, '20/06/2021', 100);
-insert into product(name, type_id, expired_date, price) values ('Beef', 3, '11/05/2021', 500);
+insert into product(name, type_id, expired_date, price) values ('Beef', 3, '31/05/2021', 500);
 insert into product(name, type_id, expired_date, price) values ('Pork', 3, '24/04/2021', 350);
 insert into product(name, type_id, expired_date, price) values ('Eskimo', 4, '28/04/2021', 80);
+insert into product(name, type_id, expired_date, price) values ('Berry icecream', 4, '28/04/2021', 80);
 
 select * from type
 select * from product
@@ -40,17 +41,12 @@ select *
 	from product p,
 		type t
 	where t.id = p.type_id
-		and t.name like upper('%icecream');
+		and p.name like ('%icecream%');
 
-select * 
-	from product 
-	where expired_date between 
-		(select date_trunc('month', now()::date) 
-			+ interval '1 month' 
-			- interval '1 day')
-		and (select date_trunc('month', now()::date) 
-			+ interval '2 month' 
-			- interval '1 day');
+select *
+	from product p
+	where date_part('month', p.expired_date)
+	       = extract(month from now()::date) + 1;
 
 select p.id, p.name, max(p.price)
 	from product p
