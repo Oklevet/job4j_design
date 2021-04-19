@@ -1,9 +1,7 @@
-package ru.job4j;
+package ru.job4j.sql;
 
 import ru.job4j.io.Config;
-import ru.job4j.io.serialization.json.B;
 
-import java.io.*;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
