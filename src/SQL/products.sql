@@ -46,7 +46,7 @@ select *
 select *
 	from product p
 	where date_part('month', p.expired_date)
-	       = extract(month from now()::date) + 1;
+	       = date_part('month', now() + interval '1 month');
 
 select p.id, p.name, max(p.price)
 	from product p
