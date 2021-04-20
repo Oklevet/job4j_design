@@ -13,19 +13,10 @@ public class ConnectionDemo {
 
     public void connect(Config map) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
-        String[] s = map.toString().split("\r\n");
-        Arrays.stream(s).forEach(l -> {
-                    String[] str = l.split("=");
-                    if (str[0].equals("url")) {
-                        url = str[1];
-                    }
-                    if (str[0].equals("login")) {
-                        login = str[1];
-                    }
-                    if (str[0].equals("password")) {
-                        password = str[1];
-                    }
-                });
+        map.load();
+        url = map.value("url");
+        password = map.value("password");
+        login = map.value("login");
         try (Connection connection = DriverManager.getConnection(url, login, password)) {
             DatabaseMetaData metaData = connection.getMetaData();
             System.out.println(metaData.getUserName());
