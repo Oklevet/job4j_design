@@ -1,8 +1,6 @@
 package ru.job4j.sql;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
@@ -51,30 +49,35 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
-    public void createTable(String tableName, String columnName, String s) {
-        String sql = String.format("create table %s (%s, %s);",
+    public void createTable(String tableName, String columnName, String s) throws SQLException {
+        String sql = String.format("create table %s (%s %s);",
             tableName, columnName, s);
+        doQuery(sql);
     }
 
-    public void dropTable(String tableName) {
-                String sql = String.format("drop table %s);", tableName);
+    public void dropTable(String tableName) throws SQLException {
+        String sql = String.format("drop table %s;", tableName);
+        doQuery(sql);
     }
 
-    public void addColumn(String tableName, String columnName, String type) {
+    public void addColumn(String tableName, String columnName, String type) throws SQLException {
         String sql = String.format(
                         "alter table %s add column %s, %s;",
                 tableName, columnName, type);
+        doQuery(sql);
     }
 
-    public void dropColumn(String tableName, String columnName) {
-                String sql = String.format(
+    public void dropColumn(String tableName, String columnName) throws SQLException {
+        String sql = String.format(
                         "alter table %s drop column %s;", tableName, columnName);
+        doQuery(sql);
     }
 
-    public void renameColumn(String tableName, String columnName, String newColumnName) {
-                String sql = String.format(
+    public void renameColumn(String tableName, String columnName, String newColumnName) throws SQLException {
+        String sql = String.format(
                         "alter table %s rename column %s to %s;",
                         tableName, columnName, newColumnName);
+        doQuery(sql);
     }
 
     public String getScheme(String tableName) throws SQLException {
@@ -93,7 +96,7 @@ public class TableEditor implements AutoCloseable {
 
     @Override
     public void close() throws Exception {
-        if (connection != null) {
+        if (connection == null) {
             connection.close();
         }
     }
