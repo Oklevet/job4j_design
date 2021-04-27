@@ -23,10 +23,8 @@ public class TableEditor implements AutoCloseable {
     }
 
     private void doQuery(String sql) throws SQLException {
-        try (Connection connection = getConnection()) {
-            try (Statement statement = connection.createStatement()) {
-                statement.execute(sql);
-            }
+        try (Statement statement = connection.createStatement()) {
+            statement.execute(sql);
         }
     }
 
@@ -35,10 +33,6 @@ public class TableEditor implements AutoCloseable {
         String url = (String) properties.get("url");
         String user = (String) properties.get("login");
         String password = (String) properties.get("password");
-        System.out.println(driver);
-        System.out.println(url);
-        System.out.println(user);
-        System.out.println(password);
         try {
             Class.forName(driver);
             connection = DriverManager.getConnection(url, user, password);
@@ -62,7 +56,7 @@ public class TableEditor implements AutoCloseable {
 
     public void addColumn(String tableName, String columnName, String type) throws SQLException {
         String sql = String.format(
-                        "alter table %s add column %s, %s;",
+                        "alter table %s add column %s %s;",
                 tableName, columnName, type);
         doQuery(sql);
     }
@@ -100,14 +94,19 @@ public class TableEditor implements AutoCloseable {
             connection.close();
         }
     }
-
-    public static void main(String[] args) {
+    private static Properties getProps() {
         Properties properties = new Properties();
         try (FileInputStream input = new FileInputStream("src/data/ddl.properties");) {
             properties.load(input);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return properties;
+    }
+
+    public static void main(String[] args) {
+        Properties properties = getProps();
+        
 
         try (TableEditor tableEditor = new TableEditor(properties)) {
             tableEditor.createTable("table1", "name", "varchar(255)");
