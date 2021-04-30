@@ -21,7 +21,7 @@ create table role_rules (
     rule_id int references rules(id)
 );
 
-create table category (
+create table category(
     id serial primary key,
     name varchar(2000)
 );
@@ -50,7 +50,6 @@ create table attach (
     name varchar(2000),
     item_id int references item(id)
 );
-
 insert into users (name) values ('Ivan');
 insert into users (name) values ('Petr');
 insert into users (name) values ('Vasya');
