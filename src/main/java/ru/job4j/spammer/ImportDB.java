@@ -23,7 +23,9 @@ public class ImportDB {
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             rd.lines().forEach(p -> {
                 String[] strs = p.split(";");
-                users.add(new User(strs[0], strs[1]));
+                if (strs.length == 2) {
+                    users.add(new User(strs[0], strs[1]));
+                }
             });
         }
         return users;
@@ -36,6 +38,8 @@ public class ImportDB {
                 cfg.getProperty("jdbc.username"),
                 cfg.getProperty("jdbc.password")
         )) {
+            PreparedStatement prS = cnt.prepareStatement("create table if not exists users "
+                    + "(name varchar(100), email varchar(100));");
             for (User user : users) {
                 try (PreparedStatement ps = cnt.prepareStatement("insert into users (name, email) values (?, ?)")) {
                     ps.setString(1, user.name);
@@ -43,6 +47,8 @@ public class ImportDB {
                     ps.execute();
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
