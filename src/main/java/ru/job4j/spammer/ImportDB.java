@@ -39,7 +39,7 @@ public class ImportDB {
                     + "(name varchar(100), email varchar(100));");
             prS.execute();
             for (User user : users) {
-                try (PreparedStatement ps = cnt.prepareStatement("insert into users (name, email) values (?, ?)")) {
+                try (PreparedStatement ps = cnt.prepareStatement("insert into users (name, email) values (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
                     ps.setString(1, user.name);
                     ps.setString(2, user.email);
                     ps.execute();
@@ -50,7 +50,10 @@ public class ImportDB {
                preparedStatement.execute();
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     while (resultSet.next()) {
-                        System.out.println(resultSet.getString("name") + "  " + resultSet.getString("email"));
+                        System.out.println(
+                                //Вывести записи вместе со сгенерированными id
+                                //resultSet.getLong(1) + " " +
+                                resultSet.getString("name") + "  " + resultSet.getString("email"));
                     }
                 }
             }
