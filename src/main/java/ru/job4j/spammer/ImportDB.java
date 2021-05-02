@@ -1,10 +1,7 @@
 package ru.job4j.spammer;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -40,11 +37,21 @@ public class ImportDB {
         )) {
             PreparedStatement prS = cnt.prepareStatement("create table if not exists users "
                     + "(name varchar(100), email varchar(100));");
+            prS.execute();
             for (User user : users) {
                 try (PreparedStatement ps = cnt.prepareStatement("insert into users (name, email) values (?, ?)")) {
                     ps.setString(1, user.name);
                     ps.setString(2, user.email);
                     ps.execute();
+                }
+            }
+           try (PreparedStatement preparedStatement = cnt.prepareStatement(
+                    "select * from users")) {
+               preparedStatement.execute();
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        System.out.println(resultSet.getString("name") + "  " + resultSet.getString("email"));
+                    }
                 }
             }
         } catch (Exception e) {
