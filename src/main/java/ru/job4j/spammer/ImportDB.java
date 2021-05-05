@@ -39,7 +39,8 @@ public class ImportDB {
                     + "(name varchar(100), email varchar(100));");
             prS.execute();
             for (User user : users) {
-                try (PreparedStatement ps = cnt.prepareStatement("insert into users (name, email) values (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+                try (PreparedStatement ps = cnt.prepareStatement("insert into users (name, email) values (?, ?)",
+                        Statement.RETURN_GENERATED_KEYS)) {
                     ps.setString(1, user.name);
                     ps.setString(2, user.email);
                     ps.execute();
