@@ -2,56 +2,70 @@ package ru.job4j.collection.map;
 
 import java.util.*;
 
+
 public class SimpleHashMap<K, V> implements Iterable<K> {
-    private int defaultCapacity = 16;
-    private int size = 10;
+    private SimpleHashMap.Entry[] elems = new SimpleHashMap.Entry[2];
+    private int count = 0;
     private int countMods = 0;
-    private Map.Entry<K, V>[] elems;
+
+    public int getSize() {
+        return elems.length;
+    }
+
+    public int getCount() {
+        return count;
+    }
 
     public boolean insert(K key, V value) {
-        boolean inserted = false;
-        for (int i = 0; i < size; i++) {
-            if (key.equals(elems[i].getKey())) {
-                elems[i].setValue(value);
-                size++;
-                countMods++;
-                inserted = true;
-                break;
-            }
-        }
-        return inserted;
-    }
-
-    private int hash(K key, Map.Entry[] map) {
-        int h = key.hashCode();
-        int result = map.length & (int) Math.pow(h, h >>> 16);
-        return result;
-    }
-
-    public V get(K key) {
-        for (int i = 0; i < elems.length; i++) {
-            if (elems[i].getKey().equals(key)) {
-                return elems[i].getValue();
-            }
-        }
-        return null;
-    }
-
-    public boolean delete(K key) {
-        for (int i = 0; i < elems.length; i++) {
-            if (elems[i].getKey().equals(key)) {
-                arrConstrict(elems, i);
-                size--;
-                countMods++;
-                return true;
-            }
+        checkLength();
+        int h = hash(key, elems);
+        if (elems[h] == null) {
+            elems[h] = new SimpleHashMap.Entry<>(key, value);
+            count++;
+            countMods++;
+            return true;
         }
         return false;
     }
 
-    public Map.Entry<K, V>[] arrConstrict(Map.Entry<K, V>[] arr, int index) {
-        System.arraycopy(arr, index + 1, arr, index, arr.length - index - 1);
-        return Arrays.copyOf(arr, arr.length - 1);
+    public V get(K key) {
+        SimpleHashMap.Entry<K, V> elem = elems[hash(key, elems)];
+        if (elem == null) {
+            throw new NoSuchElementException();
+        }
+        return elem.getValue();
+    }
+
+    public boolean delete(K key) {
+        int h = hash(key, elems);
+        if (elems[h] != null && Objects.equals(key, elems[h].getKey())) {
+            elems[h] = null;
+            count--;
+            countMods++;
+            return true;
+        }
+        return false;
+    }
+
+    private void checkLength() {
+        int length = (int) Math.round(elems.length * 0.75 - 1);
+        if (count >= length) {
+            int lengthNew = elems.length * 2;
+            SimpleHashMap.Entry[] temp = new SimpleHashMap.Entry[lengthNew];
+            for (SimpleHashMap.Entry<K, V> elem : elems) {
+                if (elem != null) {
+                    temp[hash(elem.getKey(), temp)] = elem;
+                }
+            }
+            elems = temp;
+        }
+    }
+
+    private int hash(K key, SimpleHashMap.Entry[] array) {
+        int h = key.hashCode();
+        int shuffle = (key == null) ? 0 : h ^ (h >>> 16);
+        int rsl = (array.length - 1) & shuffle;
+        return  rsl;
     }
 
     @Override
@@ -65,7 +79,7 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
                 if (countMods != innerCountMods) {
                    throw new ConcurrentModificationException();
                 }
-                return indexIter < elems.length;
+                return indexIter < elems.length && getCount() != 0;
             }
 
             @Override
@@ -73,8 +87,35 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
                  if (!hasNext()) {
                     throw new NoSuchElementException();
                  }
-                 return (V) elems[indexIter++].getValue();
+                 for (int i = indexIter; i < getSize(); i++) {
+                     SimpleHashMap.Entry<K, V> elem = elems[i];
+                     indexIter++;
+                     if (elem != null) {
+                         V result = elem.getValue();
+                         return result;
+                     }
+                 }
+                 return null;
             }
         };
     }
+
+     static class Entry<K, V> {
+        private final K key;
+        private final V value;
+
+        public Entry(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public K getKey() {
+            return key;
+        }
+
+        public V getValue() {
+            return value;
+        }
+    }
+
 }
