@@ -35,9 +35,12 @@ public class ImportDB {
                 cfg.getProperty("jdbc.username"),
                 cfg.getProperty("jdbc.password")
         )) {
-            PreparedStatement prS = cnt.prepareStatement("create table if not exists users "
-                    + "(name varchar(100), email varchar(100));");
-            prS.execute();
+            PreparedStatement prD = cnt.prepareStatement("drop table if exists users");
+                prD.execute();
+            try (PreparedStatement prS = cnt.prepareStatement("create table if not exists users "
+                    + "(id serial primary key, name varchar(100), email varchar(100));")) {
+                prS.execute();
+            }
             for (User user : users) {
                 try (PreparedStatement ps = cnt.prepareStatement("insert into users (name, email) values (?, ?)",
                         Statement.RETURN_GENERATED_KEYS)) {
@@ -53,8 +56,8 @@ public class ImportDB {
                     while (resultSet.next()) {
                         System.out.println(
                                 //Вывести записи вместе со сгенерированными id
-                                //resultSet.getLong(1) + " " +
-                                resultSet.getString("name") + "  " + resultSet.getString("email"));
+                                resultSet.getLong("id") + " "
+                                + resultSet.getString("name") + "  " + resultSet.getString("email"));
                     }
                 }
             }
