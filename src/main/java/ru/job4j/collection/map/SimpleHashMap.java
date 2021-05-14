@@ -5,6 +5,7 @@ import java.util.*;
 
 public class SimpleHashMap<K, V> implements Iterable<K> {
     private SimpleHashMap.Entry[] elems = new SimpleHashMap.Entry[2];
+    private static float loadfactor = 0.75F;
     private int count = 0;
     private int countMods = 0;
 
@@ -29,11 +30,12 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
     }
 
     public V get(K key) {
-        SimpleHashMap.Entry<K, V> elem = elems[hash(key, elems)];
-        if (elem == null) {
-            throw new NoSuchElementException();
+        int h = hash(key, elems);
+        SimpleHashMap.Entry<K, V> elem = elems[h];
+        if (Objects.equals(key, elem.key)) {
+            return elem.value;
         }
-        return elem.getValue();
+        return null;
     }
 
     public boolean delete(K key) {
@@ -48,7 +50,7 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
     }
 
     private void checkLength() {
-        int length = (int) Math.round(elems.length * 0.75 - 1);
+        int length = (int) Math.round(elems.length * loadfactor - 1);
         if (count >= length) {
             int lengthNew = elems.length * 2;
             SimpleHashMap.Entry[] temp = new SimpleHashMap.Entry[lengthNew];
