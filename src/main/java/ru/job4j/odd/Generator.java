@@ -1,4 +1,4 @@
-package ru.job4j.ODD;
+package ru.job4j.odd;
 
 import java.util.Map;
 
