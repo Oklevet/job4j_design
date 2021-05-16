@@ -1,9 +1,8 @@
-package ru.job4j.kiss;
+package ru.job4j.odd.kiss;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -43,7 +42,7 @@ public class MaxMinTest {
         int rsl = new MaxMin().max(list, new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
-                return Integer.compare(o1, o2);
+                return Integer.compare(o2, o1);
             }
         });
         int expected = 19;

@@ -1,11 +1,11 @@
-package ru.job4j.kiss;
+package ru.job4j.odd.kiss;
 
 import java.util.Comparator;
 import java.util.List;
 
 public class MaxMin {
     public <T> T max(List<T> value, Comparator<T> comparator) {
-        return find(value, comparator);
+        return find(value, comparator.reversed());
     }
 
     public <T> T min(List<T> value, Comparator<T> comparator) {
