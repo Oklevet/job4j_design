@@ -32,8 +32,10 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
     public V get(K key) {
         int h = hash(key, elems);
         SimpleHashMap.Entry<K, V> elem = elems[h];
-        if (Objects.equals(key, elem.key)) {
-            return elem.value;
+        if (elem != null) {
+            if (Objects.equals(key, elem.key)) {
+                return elem.value;
+            }
         }
         return null;
     }
