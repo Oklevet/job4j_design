@@ -5,6 +5,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Класс получает на вход абсолютный путь документа, содержащего пользователей
+ * и их почтовые ящики. Класс производит преобразование полученного документа
+ * в список с записями(class Record)
+ * @author NIK STARTSEV
+ * @version 1.0
+ */
 public class GetProperty {
     private final String path;
 
@@ -13,6 +20,12 @@ public class GetProperty {
     public GetProperty(final String path) {
         this.path = path;
     }
+
+    /**
+     * Преобразование для документа с данными которого предстоит произвести слияние
+     * @return
+     * @throws WrongFormatEmailsException
+     */
 
     public List<Record> loadMails() throws WrongFormatEmailsException {
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
@@ -33,6 +46,13 @@ public class GetProperty {
         }
         return values;
     }
+
+    /**
+     * Преобразование документа представляющего конечный, эталонный вариант после преобразование
+     * Данный метод используется в автотестировании с объектами expected
+     * @return
+     * @throws WrongFormatEmailsException
+     */
     public List<Record> loadEtalon() throws WrongFormatEmailsException {
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             for (String s = reader.readLine(); s != null; s = reader.readLine()) {
