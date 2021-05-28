@@ -21,7 +21,7 @@ public class Cache {
             boolean have = loadedFiles.containsKey(name);
             if (have) {
                 String res = String.valueOf(loadedFiles.get(name));
-                if (equal(res, null)) {
+                if (!equal(res, null)) {
                     return res;
                 } else {
                     return String.valueOf(create(name, pathLoad));
@@ -46,7 +46,7 @@ public class Cache {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return "Error of loading cache.";
     }
 
     public boolean equal(Object r, Object o) {
