@@ -17,22 +17,20 @@ public class Cache {
 
     public String searchInCache(String name) {
         Path pathLoad = Path.of(String.format("%s%s%s", path.toString(), "/", name));
+        String value = "";
         try {
-            boolean have = loadedFiles.containsKey(name);
-            if (have) {
-                String res = String.valueOf(loadedFiles.get(name));
-                if (!equal(res, null)) {
-                    return res;
-                } else {
-                    return String.valueOf(create(name, pathLoad));
-                }
-            } else {
-                return String.valueOf(create(name, pathLoad));
+                value = loadedFiles.getOrDefault(name, new SoftReference<>("")).get();
+            } catch (NullPointerException e) {
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+//        String value = loadedFiles.getOrDefault(name, new SoftReference<String>("")).get();
+        if (value == null || value.isEmpty()) {
+            try {
+                return String.valueOf(create(name, pathLoad));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        return null;
+        return value;
     }
     private String create(String name, Path path) throws IOException {
         String data = loadToCache(path);
@@ -49,16 +47,6 @@ public class Cache {
         return "Error of loading cache.";
     }
 
-    public boolean equal(Object r, Object o) {
-        if (r == o) {
-            return true;
-        }
-        if (o == null || r == null) {
-            return true;
-        }
-        return o != "";
-    }
-
     public static void main(String[] args) throws IOException {
         Cache cache = new Cache(Path.of("C:/test/cache"));
         System.out.println(cache.searchInCache("Names.txt"));
@@ -68,6 +56,8 @@ public class Cache {
         System.out.println(cache.searchInCache("Names.txt"));
         System.out.println("==============");
         cache.loadedFiles.put("Names.txt", null);
+        System.out.println(cache.searchInCache("Names.txt"));
+        System.out.println("++++");
         System.out.println(cache.searchInCache("Names.txt"));
     }
 }
