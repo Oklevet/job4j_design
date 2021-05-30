@@ -15,4 +15,15 @@ public class ControllQuality {
             new Trash().accept(food);
         }
     }
+
+    void resort() {
+        Shop shop = new Shop();
+        for (Food food : shop.shop) {
+            locateFood(food);
+        }
+        Warehouse warehouse = new Warehouse();
+        for (Food food : warehouse.warehouse) {
+            locateFood(food);
+        }
+    }
 }
