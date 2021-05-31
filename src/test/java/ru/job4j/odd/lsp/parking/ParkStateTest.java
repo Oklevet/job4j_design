@@ -11,8 +11,8 @@ public class ParkStateTest {
         ParkState parkState = new ParkState(new Parking(10, 0));
         PassengerCar car1 = new PassengerCar();
         PassengerCar car2 = new PassengerCar();
-        parkState.enterPassCar(car1);
-        parkState.enterPassCar(car2);
+        parkState.enterVehicle(car1);
+        parkState.enterVehicle(car2);
         assertThat(parkState.getOccupiedSpacePass(), is(2));
     }
 
@@ -21,9 +21,9 @@ public class ParkStateTest {
         ParkState parkState = new ParkState(new Parking(0, 10));
         Truck truck1 = new Truck(4);
         Truck truck2 = new Truck(2);
-        parkState.enterTruck(truck1);
-        parkState.enterTruck(truck2);
-        assertThat(parkState.getOccupiedSpaceTruck(), is(6));
+        parkState.enterVehicle(truck1);
+        parkState.enterVehicle(truck2);
+        assertThat(parkState.getOccupiedSpaceTruck(), is(2));
     }
 
     @Test
@@ -31,39 +31,41 @@ public class ParkStateTest {
         ParkState parkState = new ParkState(new Parking(0, 10));
         Truck truck1 = new Truck(4);
         Truck truck2 = new Truck(2);
-        parkState.enterTruck(truck1);
-        parkState.enterTruck(truck2);
-        parkState.leftTruck(truck1);
-        assertThat(parkState.getOccupiedSpaceTruck(), is(2));
+        parkState.enterVehicle(truck1);
+        parkState.enterVehicle(truck2);
+        parkState.leftVehicle(truck1);
+        assertThat(parkState.getOccupiedSpaceTruck(), is(1));
     }
 
     @Test
     public void validTruckOnPassesSpaces() throws Exception {
-        ParkState parkState = new ParkState(new Parking(10, 4));
+        ParkState parkState = new ParkState(new Parking(10, 1));
         Truck truck1 = new Truck(4);
         Truck truck2 = new Truck(2);
-        parkState.enterTruck(truck1);
-        parkState.enterTruck(truck2);
+        parkState.enterVehicle(truck1);
+        parkState.enterVehicle(truck2);
         assertThat(parkState.getOccupiedSpacePass(), is(2));
-        assertThat(parkState.getOccupiedSpaceTruck(), is(4));
+        assertThat(parkState.getOccupiedSpaceTruck(), is(1));
     }
 
     @Test
     public void validTruckOnPassesSpacesWhenTooBigToTruck() throws Exception {
-        ParkState parkState = new ParkState(new Parking(10, 2));
-        Truck truck1 = new Truck(4);
-        Truck truck2 = new Truck(2);
-        parkState.enterTruck(truck1);
-        parkState.enterTruck(truck2);
-        assertThat(parkState.getOccupiedSpacePass(), is(4));
-        assertThat(parkState.getOccupiedSpaceTruck(), is(2));
+        ParkState parkState = new ParkState(new Parking(10, 0));
+        Truck truck1 = new Truck(2);
+        Truck truck2 = new Truck(4);
+        parkState.enterVehicle(truck1);
+        parkState.enterVehicle(truck2);
+        assertThat(parkState.getOccupiedSpacePass(), is(6));
+        assertThat(parkState.getOccupiedSpaceTruck(), is(0));
     }
 
     @Test (expected = Exception.class)
     public void invalidTruckWhenTooBig() throws Exception {
-        ParkState parkState = new ParkState(new Parking(0, 2));
+        ParkState parkState = new ParkState(new Parking(0, 1));
         Truck truck1 = new Truck(4);
-        parkState.enterTruck(truck1);
+        Truck truck2 = new Truck(4);
+        parkState.enterVehicle(truck1);
+        parkState.enterVehicle(truck2);
     }
 
     @Test (expected = Exception.class)
@@ -72,17 +74,20 @@ public class ParkStateTest {
         PassengerCar car1 = new PassengerCar();
         PassengerCar car2 = new PassengerCar();
         PassengerCar car3 = new PassengerCar();
-        parkState.enterPassCar(car1);
-        parkState.enterPassCar(car2);
-        parkState.enterPassCar(car3);
+        parkState.enterVehicle(car1);
+        parkState.enterVehicle(car2);
+        parkState.enterVehicle(car3);
     }
 
-    @Test (expected = Exception.class)
+    @Test
     public void invalidNeighboring() throws Exception {
-        ParkState parkState = new ParkState(new Parking(1, 6));
+        ParkState parkState = new ParkState(new Parking(4, 1));
         Truck truck1 = new Truck(4);
         Truck truck2 = new Truck(2);
-        parkState.enterTruck(truck1);             //трак1 припарковался на места 2-5 из 1-6. Трак 2 не влезет.
-        parkState.checkNeighboring(-10);    //вызов заглушки для получения false в проверке соседства
+        Truck truck3 = new Truck(2);
+        parkState.enterVehicle(truck1);
+        parkState.enterVehicle(truck2);
+        parkState.enterVehicle(truck3);             //трак2 припарковался на места 2-3 из 1-4. Трак 3 не влезет.
+        assertFalse(parkState.checkNeighboring(-10));    //вызов заглушки для получения false в проверке соседства
     }
 }

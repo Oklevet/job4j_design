@@ -1,13 +1,12 @@
 package ru.job4j.odd.lsp.parking;
 
-public class Truck {
-    int size;
-
+public class Truck extends Vehicle {
     public Truck(int size) {
-        this.size = size;
+        super(size);
     }
 
+    @Override
     public int getSize() {
-        return size;
+        return super.getSize();
     }
 }
