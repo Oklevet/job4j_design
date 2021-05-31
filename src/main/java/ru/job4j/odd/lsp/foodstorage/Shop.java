@@ -14,7 +14,6 @@ public class Shop {
     double presentExpir;
     double fullExpir;
     double coeffDelay;
-    double yesterCoeff;
 
     public boolean accept(Food food) {
         presentExpir = Double.parseDouble(String.valueOf(Period.between(LocalDate.now(),
@@ -26,41 +25,10 @@ public class Shop {
     }
 
     public void addFood(Food food) {
-        if (new Shop().checkYesterday(food)) {
-            if (coeffDelay > toQuat) {
-                food.discount = disc;
-            }
+        if (coeffDelay > toQuat) {
+            food.discount = disc;
+
             shop.add(food);
         }
-    }
-
-     public boolean checkYesterday(Food food) {
-        presentExpir = Double.parseDouble(String.valueOf(Period.between(LocalDate.now(),
-                food.createDate).getDays()));
-        fullExpir = Double.parseDouble(String.valueOf(Period.between(food.createDate,
-                food.expiryDate).getDays()));
-        coeffDelay = presentExpir / fullExpir;
-        yesterCoeff = (presentExpir - 1) / fullExpir;
-
-        if (yesterCoeff < quat) {
-            if (new Warehouse().checkContain(food)) {
-                new Warehouse().deleteFood(food);
-                return true;
-            }
-        } else if (coeffDelay > toQuat && yesterCoeff <= toQuat) {
-            if (checkContain(food)) {
-                deleteFood(food);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    public boolean checkContain(Food food) {
-        return shop.contains(food);
-    }
-
-    public void deleteFood(Food food) {
-        shop.remove(food);
     }
 }

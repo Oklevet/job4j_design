@@ -22,16 +22,6 @@ public class Warehouse {
     }
 
     public void addFood(Food food) {
-        if (new Warehouse().checkContain(food)) {
-            warehouse.add(food);
-        }
-    }
-
-    public boolean checkContain(Food food) {
-        return warehouse.contains(food);
-    }
-
-    public void deleteFood(Food food) {
-        warehouse.remove(food);
+        warehouse.add(food);
     }
 }
