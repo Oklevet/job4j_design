@@ -21,11 +21,11 @@ public class Cache {
         try {
                 value = loadedFiles.getOrDefault(name, new SoftReference<>("")).get();
             } catch (NullPointerException e) {
-            }
-//        String value = loadedFiles.getOrDefault(name, new SoftReference<String>("")).get();
+        }
+        //value = loadedFiles.getOrDefault(name, new SoftReference<>("")).get();
         if (value == null || value.isEmpty()) {
             try {
-                return String.valueOf(create(name, pathLoad));
+                return create(name, pathLoad);
             } catch (IOException e) {
                 e.printStackTrace();
             }
