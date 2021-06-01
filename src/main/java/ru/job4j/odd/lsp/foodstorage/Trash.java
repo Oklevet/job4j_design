@@ -5,7 +5,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Trash {
+public class Trash extends Storage {
     List<Food> trash = new ArrayList<>();
     private final double full     = 1D;
     double presentExpir;
@@ -23,5 +23,15 @@ public class Trash {
 
     public void addFood(Food food) {
         trash.add(food);
+    }
+
+    @Override
+    public List<Food> getListFood() {
+        return trash;
+    }
+
+    @Override
+    public void clearStorage() {
+        trash.clear();
     }
 }

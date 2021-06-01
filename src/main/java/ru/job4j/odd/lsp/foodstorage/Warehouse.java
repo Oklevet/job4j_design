@@ -5,7 +5,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Warehouse {
+public class Warehouse extends Storage {
     List<Food> warehouse = new ArrayList<>();
     private final double quat = 0.25D;
     double presentExpir;
@@ -23,5 +23,15 @@ public class Warehouse {
 
     public void addFood(Food food) {
         warehouse.add(food);
+    }
+
+    @Override
+    public List<Food> getListFood() {
+        return warehouse;
+    }
+
+    @Override
+    public void clearStorage() {
+        warehouse.clear();
     }
 }
