@@ -21,7 +21,7 @@ public class FindFiles extends SimpleFileVisitor<Path> {
            Path directory = Path.of(argFindFiles.getDirectory());
 
            Files.walkFileTree(directory,
-                   new FileVisit(p -> matcher.matches(p), this));
+                   new FileVisit(matcher::matches, this));
         } else if (argFindFiles.getValues().containsKey("-f")) {
             String fullName = argFindFiles.getN();
             String target = Path.of(fullName).toFile().getName();

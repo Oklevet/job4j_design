@@ -1,8 +1,3 @@
-drop table cars;
-drop table body;
-drop table engine;
-drop table transmission;
-
 create table body(
 	id serial primary key,
 	elements varchar

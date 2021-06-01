@@ -1,4 +1,4 @@
-create table catalog(
+create table catalog (
     id serial primary key,
     names varchar(100),
     type varchar(100),

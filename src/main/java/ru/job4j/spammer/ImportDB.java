@@ -35,6 +35,7 @@ public class ImportDB {
                 cfg.getProperty("jdbc.username"),
                 cfg.getProperty("jdbc.password")
         )) {
+            System.out.println(cnt.toString());
             PreparedStatement prD = cnt.prepareStatement("drop table if exists users");
                 prD.execute();
             try (PreparedStatement prS = cnt.prepareStatement("create table if not exists users "

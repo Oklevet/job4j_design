@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.is;
 
 
 public class GeneratorTest {
-
+/*
     @Test
     public void produceValid() {
         Generator generator = new Generator();
@@ -93,5 +93,5 @@ public class GeneratorTest {
         );
         String out = generator.produce(sample, map);
         Assert.assertThat(out, is("${nameasd}"));
-    }
+    }*/
 }

@@ -10,7 +10,7 @@ public class EvenNumberFile {
             while ((read = in.read()) != -1) {
                 if (read == 13) {
                     System.out.println(num + " is "
-                            + (Integer.parseInt(String.valueOf(num)) % 2 == 0 ? " EVEN" : "ODD"));
+                            + (Integer.parseInt(String.valueOf(num)) % 2 == 0 ? " EVEN" : "odd"));
                 } else if (read == 10) {
                     num.setLength(0);
                 } else {
@@ -18,7 +18,7 @@ public class EvenNumberFile {
                 }
             }
             System.out.println(num + " is "
-                            + (Integer.parseInt(String.valueOf(num)) % 2 == 0 ? " EVEN" : "ODD"));
+                            + (Integer.parseInt(String.valueOf(num)) % 2 == 0 ? " EVEN" : "odd"));
         } catch (Exception e) {
             e.printStackTrace();
         }

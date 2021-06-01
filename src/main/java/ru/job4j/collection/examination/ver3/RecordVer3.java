@@ -1,15 +1,9 @@
-package ru.job4j.collection.examination;
+package ru.job4j.collection.examination.ver3;
 
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Объект хранящий в себе два параметра о каждом пользователе
- * Один Record - одна запись из документа
- * @author NIK STARTSEV
- * @version 1.0
- */
-public class Record {
+public class RecordVer3 {
     /**
      * STRING - имя пользователя,
      * SET<STRING> - множество его почтовых ящиков
@@ -17,7 +11,7 @@ public class Record {
     private String name;
     private Set<String> set = new HashSet<String>();
 
-    public Record(String name, Set<String> set) {
+    public RecordVer3(String name, Set<String> set) {
         this.name = name;
         this.set = set;
     }
@@ -38,3 +32,5 @@ public class Record {
         this.set = set;
     }
 }
+
+
