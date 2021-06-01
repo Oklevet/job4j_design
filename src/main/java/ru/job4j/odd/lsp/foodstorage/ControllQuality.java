@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControllQuality {
-    private short discount;
-    private final double quat     = 0.25D;
-    private final double toQuat   = 0.75D;
-    private final double full     = 1D;
     List<Storage> storages;
 
     public ControllQuality(List<Storage> storages) {
@@ -18,6 +14,7 @@ public class ControllQuality {
         for (Storage storage : storages) {
             if (storage.accept(food)) {
                 storage.addFood(food);
+                break;
             }
         }
     }
