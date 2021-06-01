@@ -18,11 +18,7 @@ public class Cache {
     public String searchInCache(String name) {
         Path pathLoad = Path.of(String.format("%s%s%s", path.toString(), "/", name));
         String value = "";
-        try {
-                value = loadedFiles.getOrDefault(name, new SoftReference<>("")).get();
-            } catch (NullPointerException e) {
-        }
-        //value = loadedFiles.getOrDefault(name, new SoftReference<>("")).get();
+        value = loadedFiles.getOrDefault(name, new SoftReference<>("")).get();
         if (value == null || value.isEmpty()) {
             try {
                 return create(name, pathLoad);
@@ -47,17 +43,11 @@ public class Cache {
         return "Error of loading cache.";
     }
 
-    public static void main(String[] args) throws IOException {
-        Cache cache = new Cache(Path.of("C:/test/cache"));
-        System.out.println(cache.searchInCache("Names.txt"));
-        System.out.println("==============");
-        System.out.println(cache.searchInCache("Names.txt"));
-        cache.loadedFiles.put("Names.txt", new SoftReference<>(null));
-        System.out.println(cache.searchInCache("Names.txt"));
-        System.out.println("==============");
-        cache.loadedFiles.put("Names.txt", null);
-        System.out.println(cache.searchInCache("Names.txt"));
-        System.out.println("++++");
-        System.out.println(cache.searchInCache("Names.txt"));
+    public String put(String name, String value) {
+        if (value == null) {
+            return "Error of loading cache. Value cant be null.";
+        }
+        loadedFiles.put(name, new SoftReference<>(value));
+        return "Data cached.";
     }
 }
