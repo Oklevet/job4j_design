@@ -31,10 +31,10 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
 
     public V get(K key) {
         int h = hash(key, elems);
-        SimpleHashMap.Entry<K, V> elem = elems[h];
+        Entry elem = elems[h];
         if (elem != null) {
             if (Objects.equals(key, elem.key)) {
-                return elem.value;
+                return (V) elem.value;
             }
         }
         return null;
@@ -56,9 +56,9 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
         if (count >= length) {
             int lengthNew = elems.length * 2;
             SimpleHashMap.Entry[] temp = new SimpleHashMap.Entry[lengthNew];
-            for (SimpleHashMap.Entry<K, V> elem : elems) {
+            for (Entry elem : elems) {
                 if (elem != null) {
-                    temp[hash(elem.getKey(), temp)] = elem;
+                    temp[hash((K) elem.getKey(), temp)] = elem;
                 }
             }
             elems = temp;
@@ -67,15 +67,14 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
 
     private int hash(K key, SimpleHashMap.Entry[] array) {
         int h = key.hashCode();
-        int shuffle = (key == null) ? 0 : h ^ (h >>> 16);
-        int rsl = (array.length - 1) & shuffle;
-        return  rsl;
+        int shuffle = h ^ h >>> 16;
+        return (array.length - 1) & shuffle;
     }
 
     @Override
     public Iterator iterator() {
-        return new Iterator<V>() {
-            int innerCountMods = countMods;
+        return new Iterator<Object>() {
+            final int innerCountMods = countMods;
             int indexIter = 0;
 
             @Override
@@ -87,16 +86,15 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
             }
 
             @Override
-            public V next() {
+            public Object next() {
                  if (!hasNext()) {
                     throw new NoSuchElementException();
                  }
                  for (int i = indexIter; i < getSize(); i++) {
-                     SimpleHashMap.Entry<K, V> elem = elems[i];
+                     Entry elem = elems[i];
                      indexIter++;
                      if (elem != null) {
-                         V result = elem.getValue();
-                         return result;
+                         return elem.getValue();
                      }
                  }
                  return null;

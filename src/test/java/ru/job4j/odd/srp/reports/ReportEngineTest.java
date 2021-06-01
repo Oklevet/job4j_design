@@ -19,13 +19,13 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new ReportEngine(store);
-        String expect = "Name; Hired; Fired; Salary;" +
-                System.lineSeparator() +
-                worker.getName() + ";" +
-                worker.getHired() + ";" +
-                worker.getFired() + ";" +
-                worker.getSalary() + ";" +
-                System.lineSeparator();
+        String expect = "Name; Hired; Fired; Salary;"
+                + System.lineSeparator()
+                + worker.getName() + ";"
+                + worker.getHired() + ";"
+                + worker.getFired() + ";"
+                + worker.getSalary() + ";"
+                + System.lineSeparator();
         assertThat(engine.generate(em -> true), is(expect));
     }
 
@@ -36,14 +36,14 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new ReportEngineProg(store);
-        String expect = "Name; Hired; Fired; Salary;" +
-                System.lineSeparator() +
-                worker.getName() + ";" +
-                worker.getHired() + ";" +
-                worker.getFired() + ";" +
-                worker.getSalary() + ";" +
-                ".html" +
-                System.lineSeparator();
+        String expect = "Name; Hired; Fired; Salary;"
+                + System.lineSeparator()
+                + worker.getName() + ";"
+                + worker.getHired() + ";"
+                + worker.getFired() + ";"
+                + worker.getSalary() + ";"
+                + ".html"
+                + System.lineSeparator();
         assertThat(engine.generate(em -> true), is(expect));
     }
 
@@ -56,14 +56,14 @@ public class ReportEngineTest {
         store.add(worker1);
         store.add(worker2);
         Report engine = new ReportEngineHR(store);
-        String expect = "Name; Hired; Fired; Salary;" +
-                System.lineSeparator() +
-                worker2.getName() + ";" +
-                worker2.getSalary() + ";" +
-                System.lineSeparator() +
-                worker1.getName() + ";" +
-                worker1.getSalary() + ";" +
-                System.lineSeparator();
+        String expect = "Name; Hired; Fired; Salary;"
+                + System.lineSeparator()
+                + worker2.getName() + ";"
+                + worker2.getSalary() + ";"
+                + System.lineSeparator()
+                + worker1.getName() + ";"
+                + worker1.getSalary() + ";"
+                + System.lineSeparator();
         assertThat(engine.generate(em -> true), is(expect));
     }
 
@@ -74,13 +74,13 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new ReportEngineBookkeep(store);
-        String expect = "Name; Hired; Fired; Salary;" +
-                System.lineSeparator() +
-                worker.getName() + ";" +
-                worker.getHired() + ";" +
-                worker.getFired() + ";" +
-                worker.getSalary() / 76 + ";" +
-                System.lineSeparator();
+        String expect = "Name; Hired; Fired; Salary;"
+                + System.lineSeparator()
+                + worker.getName() + ";"
+                + worker.getHired() + ";"
+                + worker.getFired() + ";"
+                + worker.getSalary() / 76 + ";"
+                + System.lineSeparator();
         assertThat(engine.generate(em -> true), is(expect));
     }
 
@@ -88,12 +88,12 @@ public class ReportEngineTest {
     public void whenOldGeneratedXML() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
-        ZoneOffset zoneOffset = ZoneOffset.of( "+03:00" );
+        ZoneOffset zoneOffset = ZoneOffset.of("+03:00");
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         ReportInXml xml = new ReportInXml(store);
         String expect = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
-                + "\n<employee name=\"Ivan\" hired=\""+ now.toInstant().atOffset(zoneOffset)
+                + "\n<employee name=\"Ivan\" hired=\"" + now.toInstant().atOffset(zoneOffset)
                 + "\" fired=\"" + now.toInstant().atOffset(zoneOffset) + "\" salary=\"100.0\"/>\n";
         assertThat(xml.generate(employee -> true), is(expect));
     }
