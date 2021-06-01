@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ArgFindFiles {
-     private Map<String, String> values = new HashMap<>();
+     private final Map<String, String> values = new HashMap<>();
 
     public ArgFindFiles(String[] args) {
         System.out.println(args.length);

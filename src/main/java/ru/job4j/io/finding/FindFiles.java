@@ -1,63 +1,51 @@
 package ru.job4j.io.finding;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.*;
 import java.util.*;
+import java.util.function.Predicate;
 
 public class FindFiles extends SimpleFileVisitor<Path> {
-    private List<String> result = new LinkedList<>();
     private final ArgFindFiles argFindFiles;
 
     public FindFiles(String[] args) {
         argFindFiles = new ArgFindFiles(args);
     }
 
-    private void writeLog() throws IOException {
-        if (argFindFiles.getValues().containsKey("-r")) {
-           String regExp = "glob:**" + argFindFiles.getN();
-           PathMatcher matcher = FileSystems.getDefault().getPathMatcher(regExp);
-           Path directory = Path.of(argFindFiles.getDirectory());
+    private void getFiles() throws IOException {
+        Path pathFile = Paths.get(argFindFiles.getDirectory());
+        Predicate predicate = PredicateArg.newPredicate(argFindFiles.getMask(),
+                argFindFiles.getN(), argFindFiles.getDirectory());
+        FileVisit fileVisit = new FileVisit(predicate, argFindFiles.getN());
 
-           Files.walkFileTree(directory,
-                   new FileVisit(matcher::matches, this));
-        } else if (argFindFiles.getValues().containsKey("-f")) {
-            String fullName = argFindFiles.getN();
-            String target = Path.of(fullName).toFile().getName();
-            Path directory = Path.of(argFindFiles.getDirectory());
-
-            Files.walkFileTree(directory,
-                    new FileVisit(p -> target.equals(p.toFile().getName()), this));
-        } else if (argFindFiles.getValues().containsKey("-m")) {
-            String s = argFindFiles.getMask();
-            String[] arr = s.split("\\*");
-            String ext = arr[1];
-            Path directory = Path.of(argFindFiles.getDirectory());
-
-            Files.walkFileTree(directory,
-                    new FileVisit(p -> p.toString().endsWith(ext), this));
-        }
-        result.forEach(System.out::println);                                                        //test zone
-        System.out.println(result.size());                                                          //test zone
-        try (PrintWriter printWriter = new PrintWriter(argFindFiles.getLog())) {
-            for (String entry: result) {
-                printWriter.println(entry);
-            }
-
-        } catch (FileNotFoundException e) {
+        try {
+            Files.walkFileTree(pathFile, fileVisit);
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
+        List<Path> list = fileVisit.getList();
+        writeLog(list, argFindFiles.getLog(), argFindFiles.getDirectory(), argFindFiles.getN());
     }
 
-    public List<String> getResult() {
-        return result;
+    private static void writeLog(List<Path> list, String log, String direct, String fName) {
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(log, true))) {
+            out.write(String.format("-d %s -n %s -m -o $s", direct, fName, log));
+            for (Path s : list) {
+                out.write(String.valueOf(s));
+                out.write(System.lineSeparator());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Ошибка при записи в файл логгирования");
+        }
+        list.forEach(System.out::println);
     }
 
     //java -jar target/findFiles.jar -d=c/:Test -n=Names.txt -o=log.txt
     //java -jar target/findFiles.jar
 
      public static void main(String[] args) throws IOException {
-        new FindFiles(args).writeLog();
+        new FindFiles(args).getFiles();
     }
 }
