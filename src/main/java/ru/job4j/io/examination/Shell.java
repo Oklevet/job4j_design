@@ -1,55 +1,50 @@
 package ru.job4j.io.examination;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 public class Shell {
     Stack<String> curr = new Stack<>();
-    {
-        curr.push("/");
-    }
 
     public void cd(String path) {
         if (path.startsWith("/")) {
             if (path.length() != 1) {
-                curr.pop();
-                curr.push(path);
+                curr.clear();
+                writeToStack(curr, path);
             }
             return;
         }
 
         if (path.equals("..")) {
-            curr.pop();
-            curr.pop();
+            curr.clear();
             return;
         }
-        boolean pth = path.charAt(0) == '.'
+        boolean pathStSpots = path.charAt(0) == '.'
                 && path.charAt(1) == '.';
-        if (!pth) {
+        if (!pathStSpots) {
             curr.push(path);
-            curr.push("/");
-            return;
+        } else {
+            while (path.startsWith("..")) {
+                path = path.substring(3);
+                curr.pop();
+            }
+            writeToStack(curr, path);
         }
-        curr.pop();
-        curr.push(path);
-        curr.push("/");
     }
 
     public String pwd() {
-        String c = String.valueOf(toString(curr));
-        if (c.length() > 3 && c.charAt(c.length() - 1) == '/') {
-            c = c.substring(0, c.length() - 1);
+        if (curr.size() == 0) {
+            return "/";
         }
-        if (c.startsWith("..")) {
-            c = c.substring(2);
-        }
-        return c;
+        StringBuilder sb = new StringBuilder();
+        curr.forEach(c -> sb.append("/").append(c));
+        return String.valueOf(sb);
     }
 
-    public static StringBuilder toString(Stack<String> st) {
-        StringBuilder sb = new StringBuilder();
-        for (String s : st) {
-            sb.append(s);
-        }
-        return sb;
+    public static void writeToStack(Stack<String> curr, String path) {
+        String[] s = path.split("/");
+        Arrays.stream(s)
+                .filter(str -> !(str.isEmpty()))
+                .forEach(curr::push);
     }
 }
