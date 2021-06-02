@@ -7,36 +7,31 @@ public class ArgFindFiles {
      private final Map<String, String> values = new HashMap<>();
 
     public ArgFindFiles(String[] args) {
-        System.out.println(args.length);
-        for (int i = 0; i < args.length - 1; i++) {
-            String par = args[i + 1];
-            if (args[i].equals("-jar") && par.charAt(0) != '-') {
-                values.put(args[i], par);
-            }
-            if (args[i].equals("-d") && par.charAt(0) != '-') {
-                values.put(args[i], par);
-            }
-            if (args[i].equals("-n") && par.charAt(0) != '-') {
-                values.put(args[i], par);
-            }
-            if (args[i].equals("-m")) {
-                values.put(args[i], args[i]);
-            }
-            if (args[i].equals("-f")) {
-                values.put(args[i], args[i]);
-            }
-            if (args[i].equals("-r")) {
-                values.put(args[i], args[i]);
-            }
-            if (args[i].equals("-o") && par.charAt(0) != '-') {
-                System.out.println("find args -o");
-                values.put(args[i], par);
-            }
-        }
+        parse(args);
     }
-
-    public Map<String, String> getValues() {
-        return values;
+    public void parse(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("Empty array of parameters.");
+        }
+        for (String s : args) {
+            if (!(s.contains("=") && s.contains("jar"))) {
+                throw new IllegalArgumentException("Wrong parameters.");
+            }
+            if (!(s.contains("=")) && s.contains("jar")) {
+                if (s.startsWith("-")) {
+                    values.put(s, null);
+                } else {
+                    if (values.containsKey("-jar")) {
+                        values.put("-jar", s);
+                    }
+                }
+            }
+            String[] strs = s.split("=");
+            if (strs.length == 1) {
+                throw new IllegalArgumentException("No value in equality.");
+            }
+            values.put(strs[0].substring(1), strs[1]);
+        }
     }
 
     public String getDirectory() {
