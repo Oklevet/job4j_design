@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.is;
 
 public class Task20Test {
     @Test
-    public void shouldOutputFullNameAndPhoneInFrame(){
+    public void shouldOutputFullNameAndPhoneInFrame() {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         Task20.main(null);
