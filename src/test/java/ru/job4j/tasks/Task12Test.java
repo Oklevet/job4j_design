@@ -12,7 +12,7 @@ public class Task12Test {
     public void checkOutHelloJob4j() {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
-        Task12.main(null);
+        FirstTask12.main(null);
         String expected = new StringJoiner(
                 System.lineSeparator(), "", System.lineSeparator()
         ).add("Ping").add("Pong").toString();

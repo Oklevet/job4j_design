@@ -2,7 +2,7 @@ package ru.job4j.tasks;
 
 import java.util.StringJoiner;
 
-public class Task16 {
+public class FirstTask16 {
     public static void main(String[] args) {
         String source = "+!?";
         String strPlus = source.substring(0, 1);

@@ -14,7 +14,7 @@ public class Task18ioTest {
     public void shouldOutputStringPlusNumber() {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
-        Task18io.main(null);
+        FirstTask18io.main(null);
         String expected = "Значение x равно 9" + System.lineSeparator() + "Значение x^2 равно 81";
         assertThat(out.toString(), is(expected));
     }

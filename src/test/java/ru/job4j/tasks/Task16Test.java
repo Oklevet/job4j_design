@@ -13,7 +13,7 @@ public class Task16Test {
     public void eachSequenceOfSameSymbolsOnSeparateLine() {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
-        Task16.main(null);
+        FirstTask16.main(null);
         assertThat(out.toString(), is("+++!!!!??"));
     }
 

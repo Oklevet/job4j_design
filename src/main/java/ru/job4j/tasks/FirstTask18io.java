@@ -1,6 +1,6 @@
 package ru.job4j.tasks;
 
-public class Task18io {
+public class FirstTask18io {
     public static void main(String[] args) {
         int x = 9;
         System.out.println("Значение x равно " + x);

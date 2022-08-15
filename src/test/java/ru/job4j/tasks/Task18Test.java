@@ -19,7 +19,7 @@ public class Task18Test {
                 input.getBytes()
         ));
         System.setOut(new PrintStream(out));
-        Task18.main(null);
+        FirstTask18.main(null);
         String expected = new StringJoiner(
                 System.lineSeparator(), "", System.lineSeparator()
         )

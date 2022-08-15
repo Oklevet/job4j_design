@@ -13,7 +13,7 @@ public class Task20Test {
     public void shouldOutputFullNameAndPhoneInFrame() {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
-        Task20.main(null);
+        FirstTask20.main(null);
         String expected = "************************" + System.lineSeparator()
                         + "* Фамилия Имя Отчество *" + System.lineSeparator()
                         + "* +7(938) 123-45-67    *" + System.lineSeparator()

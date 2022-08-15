@@ -1,6 +1,6 @@
 package ru.job4j.tasks;
 
-public class Task17 {
+public class FirstTask17 {
     public static void main(String[] args) {
         int x = 6;
         System.out.println(x);

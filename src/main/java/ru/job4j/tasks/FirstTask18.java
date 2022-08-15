@@ -2,15 +2,14 @@ package ru.job4j.tasks;
 
 import java.util.Scanner;
 
-public class Task13 {
+public class FirstTask18 {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         double a = input.nextDouble();
-        double b = input.nextDouble();
-        print(a + b);
-        print(a - b);
-        print(a * b);
-        print(a / b);
+        double r = input.nextDouble();
+        print(a * 4);
+        print(Math.PI * 2 * r);
+        print(Math.PI * Math.pow(r, 2));
     }
 
     public static void print(double a) {

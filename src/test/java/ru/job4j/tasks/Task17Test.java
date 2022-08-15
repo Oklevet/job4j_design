@@ -12,7 +12,7 @@ public class Task17Test {
     public void shouldOutputSqrAndCubeOf6() {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
-        Task17.main(null);
+        FirstTask17.main(null);
         String expected = "6" + System.lineSeparator() + "36" + System.lineSeparator() + "216";
         assertThat(out.toString(), is(expected));
     }

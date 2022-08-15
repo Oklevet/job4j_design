@@ -2,7 +2,6 @@ package ru.job4j.tasks;
 
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -15,7 +14,7 @@ public class Task14Test {
     public void whenDelimiterIsPastedBetweenLettersOfString() {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
-        Task14.main(null);
+        FirstTask14.main(null);
         assertThat(out.toString(), is("H-e-l-l-o-,-f-r-i-e-n-d!"));
     }
 }

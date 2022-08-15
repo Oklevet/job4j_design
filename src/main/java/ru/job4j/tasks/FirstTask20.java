@@ -1,6 +1,6 @@
 package ru.job4j.tasks;
 
-public class Task20 {
+public class FirstTask20 {
     public static void main(String[] args) {
         String fullName = "Фамилия Имя Отчество";
         String phoneNumber = "+7(938) 123-45-67";
