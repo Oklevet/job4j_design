@@ -88,7 +88,7 @@ public class ReportEngineTest {
     public void whenOldGeneratedXML() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
-        ZoneOffset zoneOffset = ZoneOffset.of("+03:00");
+        ZoneOffset zoneOffset = ZoneOffset.of("+05:00");
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         ReportInXml xml = new ReportInXml(store);

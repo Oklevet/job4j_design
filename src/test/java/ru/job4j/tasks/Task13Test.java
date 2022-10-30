@@ -24,10 +24,10 @@ public class Task13Test {
         String expected = new StringJoiner(
                 System.lineSeparator(), "", System.lineSeparator()
         )
-                .add("1.1")
-                .add("0.9")
-                .add("0.1")
-                .add("10.0")
+                .add("1,1")
+                .add("0,9")
+                .add("0,1")
+                .add("10,0")
                 .toString();
         assertThat(out.toString(), is(expected));
     }

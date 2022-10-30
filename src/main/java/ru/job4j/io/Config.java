@@ -19,11 +19,13 @@ public class Config {
     public void load() {
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             for (String s = reader.readLine(); s != null; s = reader.readLine()) {
-                String[] strs = s.split("=", 2);
-                if (strs[1].isEmpty()) {
-                    throw new IllegalArgumentException();
+                if (s.codePointAt(0) != 35) {
+                    String[] strs = s.split("=", 2);
+                    if (strs[1].isEmpty()) {
+                        throw new IllegalArgumentException();
+                    }
+                    values.put(strs[0], strs[1]);
                 }
-                values.put(strs[0], strs[1]);
             }
         } catch (IOException e) {
             e.printStackTrace();

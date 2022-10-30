@@ -9,8 +9,11 @@ public class ConfigTest {
 
     @Test
     public void whenPairWithCommentsAndEmptyStrings() {
-//        String path = "./data/pair_without_comment.properties";
-//        String path = ".src/main//java//ru//job4j/chapter_006/data/pair_without_comment.properties";
+        /**
+         * Paths 4 tests
+         * String path = "./data/pair_without_comment.properties";
+         * String path = ".src/main//java//ru//job4j/chapter_006/data/pair_without_comment.properties";
+         */
         String path = "configNote.txt";
         Config config = new Config(path);
         config.load();

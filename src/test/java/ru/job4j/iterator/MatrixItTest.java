@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class MatrixItTest extends TestCase {
+public class MatrixItTest {
 
     @Test
     public void when4El() {
