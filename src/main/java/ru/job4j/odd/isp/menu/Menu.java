@@ -51,7 +51,6 @@ public class Menu {
     public static void main(String[] args) {
         Menu menu = new Menu();
         menu.addRoot(new Item("qwe", new Operation2()));
-        //Выбор пункта в котором создать подпункт
         menu.addSub("Задача 1.", new Item("qwe1", new Operation1()));
         menu.addSub("Задача 1.", new Item("qwe2", new Operation1()));
         menu.addSub("Задача 1.2.", new Item("qwe2asd", new Operation2()));

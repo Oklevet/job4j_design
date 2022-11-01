@@ -35,12 +35,16 @@ public class AdultCat implements CatActions {
     public void canLightRun() {
 
     }
-    //метод невозможен к исполнению объектом данного класса
+    /**
+     * метод невозможен к исполнению объектом данного класса
+     */
     @Override
     public void funeral() {
 
     }
-    //метод невозможен к исполнению объектом данного класса
+    /**
+     * метод невозможен к исполнению объектом данного класса
+     */
     @Override
     public void furAbsorbsMastersTears() {
 

@@ -42,9 +42,11 @@ public class FindFiles extends SimpleFileVisitor<Path> {
         list.forEach(System.out::println);
     }
 
-    //java -jar target/findFiles.jar -d=c/:Test -n=Names.txt -o=log.txt
-    //java -jar target/findFiles.jar
-
+    /**
+     *
+     * @param args-jar target/findFiles.jar -d=c/:Test -n=Names.txt -o=log.txt
+     * @param args-jar target/findFiles.jar
+     */
      public static void main(String[] args) throws IOException {
         new FindFiles(args).getFiles();
     }

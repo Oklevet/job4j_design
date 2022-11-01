@@ -11,13 +11,15 @@ public class SimpleLinked<T> implements Iterable<T> {
     private int modCount = 0;
     private int size = 0;
 
+    /**
+     * or if {last = node;} else {last.prev = last;}
+     * @param model T
+     */
     public void add(T model) {
         Node<T> node = new Node<T>(null, last, model);
         if (size == 0) {
             first = node;
-            //last = node;
         } else {
-            //last.prev = last;
             last.next = node;
         }
         last = node;

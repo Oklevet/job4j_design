@@ -15,12 +15,15 @@ public class Card {
         this.size = size;
     }
 
+    /**
+     * пользователь вводит сумму на экране АТМ
+     */
     public void withdrawCash() {
         if (balance < tariffComiss + minSum) {
             throw new IllegalArgumentException("You cant withdraw cash. Min sum of withdraw "
                     + minSum + ". Min comiss " + tariffComiss + ".");
         }
-        int sum = 0;    //пользователь вводит сумму на экране АТМ
+        int sum = 0;
 
         if (balance + limit < sum) {
             throw new IllegalArgumentException("insufficient funds");

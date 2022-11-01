@@ -18,7 +18,6 @@ public class SortThenComparingMethodTest {
         SortThenComparingMethod.User user5 = new SortThenComparingMethod.User("A", 12);
         List<SortThenComparingMethod.User> input = Arrays.asList(user1, user2, user3, user4, user5);
         List<SortThenComparingMethod.User> expect = Arrays.asList(user3, user5, user2, user4, user1);
-        //input.sort(new SortThenComparingMethod.ThenComparing());
         input.sort(SortThenComparingMethod.thenComparing());
         assertEquals(expect, input);
     }

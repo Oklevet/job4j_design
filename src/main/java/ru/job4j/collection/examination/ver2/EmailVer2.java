@@ -17,12 +17,12 @@ public class EmailVer2 {
     public Map<String, Set<String>> sortMail(String path) throws WrongFormatEmailsException {
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             for (String s = reader.readLine(); s != null; s = reader.readLine()) {
-                String[] strs = s.split(" ->", 2);      //str[0] - user
+                String[] strs = s.split(" ->", 2);
                 key = strs[0];
                 if (strs[1].isEmpty()) {
                     throw new IllegalArgumentException();
                 }
-                Set<String> set = new HashSet<>();            //str[1] = set = emails
+                Set<String> set = new HashSet<>();
                 Arrays.asList(strs[1].split(",")).forEach(ss -> set.add(ss));
                 findUser = "";
                 for (Map.Entry<String, Set<String>> map : dir.entrySet()) {
@@ -56,10 +56,14 @@ public class EmailVer2 {
         }
     }
 
+    /**
+     * anther paths
+     * String path = "src/data/emails_hard.properties";
+     * String path = "src/data/emailTwo.properties";
+     * @param args null
+     */
     public static void main(String[] args) throws WrongFormatEmailsException {
         String path = "src/data/emails.properties";
-//        String path = "src/data/emails_hard.properties";
-//        String path = "src/data/emailTwo.properties";
         EmailVer2 em = new EmailVer2();
         var print = em.sortMail(path);
         em.toString(print);

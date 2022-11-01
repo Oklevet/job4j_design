@@ -17,8 +17,9 @@ public class ParkState implements Entered, Left, Neighboring {
         /**
          * Some logic, for neighboring.
          * Stack of nums consecutive spaces in groups by their places in this parking
+         * next if - заглушка для теста
          */
-        if (nums == -10) {  //заглушка для теста
+        if (nums == -10) {
             return false;
         }
         return true;

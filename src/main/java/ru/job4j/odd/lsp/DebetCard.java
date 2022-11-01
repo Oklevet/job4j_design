@@ -12,12 +12,15 @@ public class DebetCard {
     public DebetCard() {
     }
 
+    /**
+     * пользователь вводит сумму на экране АТМ
+     */
     public void withdrawCash() {
         if (balance < 80) {
             throw new IllegalArgumentException("You cant withdraw cash. Min sum of withdraw 50."
                     + " Min comiss 30");
         }
-        int sum = 0;    //пользователь вводит сумму на экране АТМ
+        int sum = 0;
 
         if (balance < sum) {
             throw new IllegalArgumentException("insufficient funds");
@@ -28,20 +31,21 @@ public class DebetCard {
 
         /**
          * try init smartCard. Size can be different. ERROR.
+         * super("50 × 35 мм");
          */
         public CreditCard(String size) {
-            //super("50 × 35 мм");
         }
 
         public void withdrawCash() {
             /**
              * comiss on credit card higher. Minimum comiss sum = 100. ERROR.
+             * пользователь вводит сумму на экране АТМ
              */
             if (balance < 80) {
                 throw new IllegalArgumentException("You cant withdraw cash. Min sum of withdraw 50."
                         + " Min comiss 30");
             }
-            int sum = 0;    //пользователь вводит сумму на экране АТМ
+            int sum = 0;
 
             /**
              * credit card can has balance under 0. ERROR.

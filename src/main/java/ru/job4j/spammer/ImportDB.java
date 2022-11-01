@@ -55,8 +55,10 @@ public class ImportDB {
                preparedStatement.execute();
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     while (resultSet.next()) {
+                        /**
+                         *Вывести записи вместе со сгенерированными id
+                         */
                         System.out.println(
-                                //Вывести записи вместе со сгенерированными id
                                 resultSet.getLong("id") + " "
                                 + resultSet.getString("name") + "  " + resultSet.getString("email"));
                     }

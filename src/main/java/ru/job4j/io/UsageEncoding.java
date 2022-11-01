@@ -7,7 +7,6 @@ import java.util.List;
 public class UsageEncoding {
     public String readFile(String path) {
         StringBuilder builder = new StringBuilder();
-        //try (BufferedReader br = new BufferedReader(new FileReader(path))) {
         try (BufferedReader br = new BufferedReader(new FileReader(path, Charset.forName("WINDOWS-1251")))) {
             int data;
             while ((data = br.read()) > 0) {

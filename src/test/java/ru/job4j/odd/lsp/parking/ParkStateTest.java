@@ -87,7 +87,11 @@ public class ParkStateTest {
         Truck truck3 = new Truck(2);
         parkState.enterVehicle(truck1);
         parkState.enterVehicle(truck2);
-        parkState.enterVehicle(truck3);             //трак2 припарковался на места 2-3 из 1-4. Трак 3 не влезет.
-        assertFalse(parkState.checkNeighboring(-10));    //вызов заглушки для получения false в проверке соседства
+        /**
+         * трак2 припарковался на места 2-3 из 1-4. Трак 3 не влезет.
+         * вызов заглушки для получения false в проверке соседства
+         */
+        parkState.enterVehicle(truck3);
+        assertFalse(parkState.checkNeighboring(-10));
     }
 }
