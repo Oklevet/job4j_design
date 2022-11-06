@@ -9,7 +9,7 @@ public class Task18 {
 
         for (int i = 10; i < 19; i += 2) {
             if (i % 4 == 0) {
-                sj.add(String.valueOf(i) + "#");
+                sj.add((i) + "#");
             } else {
                 sj.add(String.valueOf(i));
             }
