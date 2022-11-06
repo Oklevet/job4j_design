@@ -95,7 +95,7 @@ public class Task57Test {
         Task57.triangleType(60, 60);
         StringJoiner expected = new StringJoiner(
                 System.lineSeparator(), "", System.lineSeparator())
-                .add("Равнобедренный").add("Равносторонний");
+                .add("Остроугольный").add("Равнобедренный").add("Равносторонний");
         assertThat(out.toString(), is(expected.toString()));
     }
 
@@ -104,7 +104,7 @@ public class Task57Test {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         Task57.triangleType(80, 50);
-        String expected = "Равнобедренный" + ln;
+        String expected = "Остроугольный" + ln + "Равнобедренный" + ln;
         assertThat(out.toString(), is(expected));
     }
 
@@ -113,7 +113,7 @@ public class Task57Test {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         Task57.triangleType(50, 50);
-        String expected = "Равнобедренный" + ln;
+        String expected = "Остроугольный" + ln + "Равнобедренный" + ln;
         assertThat(out.toString(), is(expected));
     }
 
