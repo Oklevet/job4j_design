@@ -66,19 +66,15 @@ public class AnalyzeByMapTest {
         );
         for (Label label : average) {
             switch (label.getName()) {
-                case ("Ivanov"):
-                    assertThat(label.getScore()).isEqualTo(80.0);
-                    break;
-                case ("Petrov"):
-                    assertThat(label.getScore()).isEqualTo(80.0);
-                    break;
-                case ("Sidorov"):
-                    assertThat(label.getScore()).isEqualTo(60.0);
-                    break;
+                case ("Ivanov"), ("Petrov") -> assertThat(label.getScore()).isEqualTo(80.0);
+                case ("Sidorov") -> assertThat(label.getScore()).isEqualTo(60.0);
+                default -> {
+                }
             }
         }
     }
 
+    @SuppressWarnings("checkstyle:MissingSwitchDefault")
     @Test
     public void whenListOfSubjectAverage() {
         List<Label> average = AnalyzeByMap.averageScoreBySubject(
@@ -108,15 +104,9 @@ public class AnalyzeByMapTest {
         );
         for (Label label : average) {
             switch (label.getName()) {
-                case ("Math"):
-                    assertThat(label.getScore()).isEqualTo(70D);
-                    break;
-                case ("Lang"):
-                    assertThat(label.getScore()).isEqualTo(70D);
-                    break;
-                case ("Philosophy"):
-                    assertThat(label.getScore()).isEqualTo(70D);
-                    break;
+                case ("Math"), ("Lang"), ("Philosophy") -> assertThat(label.getScore()).isEqualTo(70D);
+                default -> {
+                }
             }
         }
     }

@@ -7,6 +7,8 @@ public class Task50 {
         fnum2 = num2 % 10;
         if (fnum1 == fnum2) {
             System.out.println("Одинаковые");
-        } else System.out.println(Math.max(fnum1, fnum2));
+        } else {
+            System.out.println(Math.max(fnum1, fnum2));
+        }
     }
 }

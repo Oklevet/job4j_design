@@ -18,11 +18,11 @@ public class FirstTask21Test {
         System.setIn(in);
         FirstTask21.main(null);
         String expected =
-                "*****" + System.lineSeparator() +
-                        " * *" + System.lineSeparator() +
-                        "  *" + System.lineSeparator() +
-                        " * *" + System.lineSeparator() +
-                        "*****";
+                "*****" + System.lineSeparator()
+                        + " * *" + System.lineSeparator()
+                        + "  *" + System.lineSeparator()
+                        + " * *" + System.lineSeparator()
+                        + "*****";
         assertThat(out.toString(), is(expected));
     }
 
@@ -34,14 +34,14 @@ public class FirstTask21Test {
         System.setIn(in);
         FirstTask21.main(null);
         String expected =
-                "********" + System.lineSeparator() +
-                        " *    *" + System.lineSeparator() +
-                        "  *  *" + System.lineSeparator() +
-                        "   **" + System.lineSeparator() +
-                        "   **" + System.lineSeparator() +
-                        "  *  *" + System.lineSeparator() +
-                        " *    *" + System.lineSeparator() +
-                        "********";
+                "********" + System.lineSeparator()
+                        + " *    *" + System.lineSeparator()
+                        + "  *  *" + System.lineSeparator()
+                        + "   **" + System.lineSeparator()
+                        + "   **" + System.lineSeparator()
+                        + "  *  *" + System.lineSeparator()
+                        + " *    *" + System.lineSeparator()
+                        + "********";
         assertThat(out.toString(), is(expected));
     }
 
@@ -53,15 +53,15 @@ public class FirstTask21Test {
         System.setIn(in);
         FirstTask21.main(null);
         String expected =
-                "*********" + System.lineSeparator() +
-                        " *     *" + System.lineSeparator() +
-                        "  *   *" + System.lineSeparator() +
-                        "   * *" + System.lineSeparator() +
-                        "    *" + System.lineSeparator() +
-                        "   * *" + System.lineSeparator() +
-                        "  *   *" + System.lineSeparator() +
-                        " *     *" + System.lineSeparator() +
-                        "*********";
+                "*********" + System.lineSeparator()
+                        + " *     *" + System.lineSeparator()
+                        + "  *   *" + System.lineSeparator()
+                        + "   * *" + System.lineSeparator()
+                        + "    *" + System.lineSeparator()
+                        + "   * *" + System.lineSeparator()
+                        + "  *   *" + System.lineSeparator()
+                        + " *     *" + System.lineSeparator()
+                        + "*********";
         assertThat(out.toString(), is(expected));
     }
 }

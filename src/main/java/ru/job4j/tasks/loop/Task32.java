@@ -12,4 +12,5 @@ public class Task32 {
         }
         System.out.println(sj);
     }
+
 }

@@ -13,12 +13,18 @@ public class PredicateArg {
             public boolean test(Path path) {
                 boolean rsl = false;
                 switch (arg) {
-                    case "-f" -> rsl = path.toFile().getName().equals(fileFind);
-                    case "-m" -> rsl = path.toFile().getName().endsWith(fileFind.substring(2));
+                    case "-f" -> {
+                        rsl = path.toFile().getName().equals(fileFind);
+                    }
+                    case "-m" -> {
+                        rsl = path.toFile().getName().endsWith(fileFind.substring(2));
+                    }
                     case "-r" -> {
                         Pattern p = Pattern.compile(fileFind);
                         Matcher m = p.matcher(direct);
                         rsl = m.matches();
+                    }
+                    default -> {
                     }
                 }
                 return rsl;

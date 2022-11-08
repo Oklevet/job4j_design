@@ -3,7 +3,7 @@ package ru.job4j.tasks.condition;
 public class Task65 {
     public static void season(int number) {
         String res = null;
-        if ((number < 3 && number >0) || number == 12) {
+        if ((number < 3 && number > 0) || number == 12) {
             res = "Зима";
         }
 

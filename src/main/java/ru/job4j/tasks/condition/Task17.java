@@ -4,11 +4,9 @@ public class Task17 {
     public static void signCheck(int number) {
         if (number < 0) {
             System.out.println("Отрицательное");
-        }
-        else if (number == 0) {
+        } else if (number == 0) {
             System.out.println("Ноль");
-        }
-        else {
+        } else {
             System.out.println("Положительное");
         }
     }

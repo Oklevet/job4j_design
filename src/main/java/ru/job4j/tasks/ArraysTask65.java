@@ -2,12 +2,12 @@ package ru.job4j.tasks;
 
 import java.util.ArrayList;
 
-public class ArraysTask6_5 {
+public class ArraysTask65 {
     public static char[] onlyLowCase(char[] input) {
         ArrayList<Character> arrayList = new ArrayList<>();
         int i = 0;
 
-        for(Character ch : input) {
+        for (Character ch : input) {
             if (Character.isLetter(ch) && Character.isLowerCase(ch)) {
                 arrayList.add(Character.toUpperCase(ch));
             }

@@ -10,7 +10,7 @@ public class AnalyzeByMap {
 
         for (Pupil pupil : pupils) {
             sumScore += (pupil.getSubjects().stream().map(Subject::getScore).reduce(0,
-                    Integer::sum) /(double) pupil.getSubjects().size());
+                    Integer::sum) / (double) pupil.getSubjects().size());
         }
         /**
          * Как собрать среднее значение одной командой вложенным потоком?
@@ -46,8 +46,8 @@ public class AnalyzeByMap {
 
         for (Pupil pupil : pupils) {
             for (Subject subj : pupil.getSubjects()) {
-                labels.computeIfPresent(subj.getName(), (a, b) -> b = new Record(b.getSubjCount() + 1
-                        , b.getScore() + subj.getScore()));
+                labels.computeIfPresent(subj.getName(), (a, b) -> b = new Record(b.getSubjCount() + 1,
+                        b.getScore() + subj.getScore()));
                 labels.putIfAbsent(subj.getName(), new Record(1, subj.getScore()));
             }
         }
@@ -66,7 +66,7 @@ public class AnalyzeByMap {
                 .map(pupil -> new Label(pupil.getName(),
                                         pupil.getSubjects().stream()
                                                 .map(Subject::getScore)
-                                                .reduce(0,Integer::sum)))
+                                                .reduce(0, Integer::sum)))
                 .sorted((o1, o2) -> o2.compareTo(o1))
                 .findFirst().get();
     }
