@@ -1,9 +1,8 @@
 package ru.job4j.assertj;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class BoxTest {
     @Test
@@ -66,27 +65,27 @@ class BoxTest {
     void getAreaSphere() {
         Box box = new Box(0, 10);
         double num = box.getArea();
-        assertThat(num).isEqualTo(1256.6370614359173);
+        Assertions.assertEquals(num, 1256.64, 0.01);
     }
 
     @Test
     void getAreaTetrahedron() {
         Box box = new Box(4, 10);
         double num = box.getArea();
-        assertThat(num).isEqualTo(173.20508075688772);
+        Assertions.assertEquals(num, 173.20, 0.01);
     }
 
     @Test
     void getAreaCube() {
         Box box = new Box(8, 10);
         int num = (int) box.getArea();
-        assertThat(num).isEqualTo(600);
+        Assertions.assertEquals(num, 600, 0.01);
     }
 
     @Test
     void getAreaUNKNOWN() {
         Box box = new Box(10, 10);
         double num = box.getArea();
-        assertThat(num).isEqualTo(0);
+        Assertions.assertEquals(num, 0, 0.01);
     }
 }
