@@ -1,5 +1,7 @@
 package ru.job4j.io;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +34,29 @@ public class ArgsName {
         names.parse(args);
         return names;
     }
+
+    public static void validScanner(String[] argsName) {
+        if (argsName.length != 4) {
+            throw new IllegalArgumentException("Arguments parameters: directory, exclude, output");
+        }
+        for (String s : argsName) {
+            if (!(s.contains("-path") || s.contains("-out") || s.contains("-delimiter") || s.contains("-filter"))) {
+                throw new IllegalArgumentException("Arguments parameters: path, delimiter, out, filter");
+            }
+        }
+        Path start = Paths.get(argsName[0].split("=")[1]);
+        if (!start.toFile().exists()) {
+            throw new IllegalArgumentException("File is not exist.   " + start.toAbsolutePath());
+        }
+        if (argsName[1].equals(";")) {
+            throw new IllegalArgumentException("Delimiter should be ';'");
+        }
+        Path destination = Paths.get(argsName[2].split("=")[1]);
+        if (!destination.toFile().exists()) {
+            throw new IllegalArgumentException("File is not exist.   " + destination.toAbsolutePath());
+        }
+    }
+
 
     public static void main(String[] args) {
         ArgsName jvm = ArgsName.of(new String[] {"-Xmx=512", "-encoding=UTF-8"});
