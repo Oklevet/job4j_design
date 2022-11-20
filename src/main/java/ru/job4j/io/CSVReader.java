@@ -75,7 +75,7 @@ public class CSVReader {
 
     /**
      * ARGS
-     * -path=source.csv -delimiter=;  -out=consoleout.txt -filter=name,age
+     * -path=source.csv     -delimiter=;    -out=consoleout.txt   -filter=name,age
      */
     public static void main(String[] args) throws Exception {
         ArgsName argsNames = ArgsName.of(args);
