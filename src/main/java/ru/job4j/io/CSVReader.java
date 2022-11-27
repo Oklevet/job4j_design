@@ -2,13 +2,17 @@ package ru.job4j.io;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
 public class CSVReader {
-    public static void handle(ArgsName argsName) throws Exception {
+    public static void handle(ArgsName argsName) {
+        validScanner(argsName);
+
         List<List<String>> listOfFile = new ArrayList<>();
         String filter = argsName.get("filter");
         String out = argsName.get("out");
@@ -35,7 +39,7 @@ public class CSVReader {
 
     public static void printOutFile(String res, String out) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(out, Charset.defaultCharset()))) {
-            if (out.equals("consoleout")) {
+            if (out.equals("stdout")) {
                 System.out.println(res);
             } else {
                 writer.println(res);
@@ -73,13 +77,33 @@ public class CSVReader {
         return filterIdx;
     }
 
+    public static void validScanner(ArgsName argsName) {
+        if (argsName.getSize() != 4) {
+            throw new IllegalArgumentException("Arguments parameters: directory, exclude, output");
+        }
+        if (!argsName.containKey("path") || !argsName.containKey("out") || !argsName.containKey("delimiter")
+                || !argsName.containKey("filter")) {
+                throw new IllegalArgumentException("Arguments parameters: path, delimiter, out, filter");
+        }
+        Path start = Paths.get(argsName.getValue("path"));
+        if (!start.toFile().exists()) {
+            throw new IllegalArgumentException("File is not exist.   " + start.toAbsolutePath());
+        }
+        if (!argsName.getValue("delimiter").equals(";")) {
+            throw new IllegalArgumentException("Delimiter should be ';'");
+        }
+        Path destination = Paths.get(argsName.getValue("out"));
+        if (!destination.toFile().exists()) {
+            throw new IllegalArgumentException("File is not exist.   " + destination.toAbsolutePath());
+        }
+    }
+
     /**
      * ARGS
-     * -path=source.csv     -delimiter=;    -out=consoleout.txt   -filter=name,age
+     * -path=source.csv     -delimiter=;    -out=stdout.txt   -filter=name,age
      */
     public static void main(String[] args) throws Exception {
         ArgsName argsNames = ArgsName.of(args);
-        ArgsName.validScanner(args);
         CSVReader.handle(argsNames);
     }
 }
