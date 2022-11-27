@@ -11,8 +11,6 @@ import java.util.StringJoiner;
 
 public class CSVReader {
     public static void handle(ArgsName argsName) {
-        validScanner(argsName);
-
         List<List<String>> listOfFile = new ArrayList<>();
         String filter = argsName.get("filter");
         String out = argsName.get("out");
@@ -104,6 +102,7 @@ public class CSVReader {
      */
     public static void main(String[] args) throws Exception {
         ArgsName argsNames = ArgsName.of(args);
+        validScanner(argsNames);
         CSVReader.handle(argsNames);
     }
 }
