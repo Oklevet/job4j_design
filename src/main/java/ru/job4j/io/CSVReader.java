@@ -65,10 +65,10 @@ public class CSVReader {
     public static List<Integer> getFilterIdx(String filter, List<List<String>> list) {
         List<Integer> filterIdx = new ArrayList<>();
         String[] filters = filter.split(",");
-        for (int i = 0; i < list.get(0).size(); i++) {
-            for (String sFilt : filters) {
-                if (sFilt.equals(list.get(0).get(i))) {
-                    filterIdx.add(i);
+        for (int i = 0; i < filters.length; i++) {
+            for (int j = 0; j < list.get(0).size(); j++) {
+                if (filters[i].equals(list.get(0).get(j))) {
+                    filterIdx.add(j);
                 }
             }
         }
