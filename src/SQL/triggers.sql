@@ -53,6 +53,17 @@ LANGUAGE 'plpgsql';
 
 
 --new triggers
+create or replace function add_tax()
+    returns trigger as
+$$
+    BEGIN
+        update products
+        set price = price + tax;
+        where id = (select id from inserted)
+        return new;
+    END;
+$$
+LANGUAGE 'plpgsql';
 
 create trigger add_tax_trigger
     after insert on products
@@ -60,14 +71,12 @@ create trigger add_tax_trigger
     for each statement
     execute procedure add_tax();
 
---в условии - налог действет для любого товара, значит для уже имеющегося в том числе. Хотя и странновато.
-create or replace function add_tax()
+create or replace function add_tax2()
     returns trigger as
 $$
     BEGIN
-        update products
-        set price = price + tax;
-        return new;
+        new.price = new.price + tax;
+        return NEW;
     END;
 $$
 LANGUAGE 'plpgsql';
@@ -78,17 +87,6 @@ create trigger add_tax_trigger_2
     for each row
     execute procedure add_tax2();
 
-create or replace function add_tax2()
-    returns trigger as
-$$
-    BEGIN
-        update products
-        set price = price + tax
-        where id = new.id;
-        return NEW;
-    END;
-$$
-LANGUAGE 'plpgsql';
 
 create table history_of_price (
     id serial primary key,
@@ -96,12 +94,6 @@ create table history_of_price (
     price integer,
     "date" timestamp
 );
-
-create trigger add_history_price_trigger
-    before insert
-    on products
-    for each row
-    execute procedure add_tax2();
 
 create or replace function add_tax2()
     returns trigger as
@@ -112,3 +104,9 @@ $$
     END;
 $$
 LANGUAGE 'plpgsql';
+
+create trigger add_history_price_trigger
+    before insert
+    on products
+    for each row
+    execute procedure add_tax2();
