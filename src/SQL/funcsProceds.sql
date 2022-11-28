@@ -103,6 +103,7 @@ $$;
 
 create or replace procedure del_data_by_id(u_id integer)
 language 'plpgsql'
+as
 $$
     begin
         delete from products where id = u_id;
