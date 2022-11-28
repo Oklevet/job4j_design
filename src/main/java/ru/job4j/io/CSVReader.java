@@ -87,7 +87,7 @@ public class CSVReader {
         if (!start.toFile().exists()) {
             throw new IllegalArgumentException("File is not exist.   " + start.toAbsolutePath());
         }
-        if (!argsName.getValue("delimiter").equals(";")) {
+        if (!";".equals(argsName.getValue("delimiter"))) {
             throw new IllegalArgumentException("Delimiter should be ';'");
         }
         Path destination = Paths.get(argsName.getValue("out"));
