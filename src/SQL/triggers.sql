@@ -58,7 +58,7 @@ create or replace function add_tax()
 $$
     BEGIN
         update products
-        set price = price + tax;
+        set price = price + price * 0.1
         where id = (select id from inserted)
         return new;
     END;
@@ -75,7 +75,7 @@ create or replace function add_tax2()
     returns trigger as
 $$
     BEGIN
-        new.price = new.price + tax;
+        new.price = new.price + new.price * 0.1;
         return NEW;
     END;
 $$
@@ -99,7 +99,7 @@ create or replace function add_tax2()
     returns trigger as
 $$
     BEGIN
-        insert into history_of_price("name", price, "date") VALUES (new.name, new.price, sysdate);
+        insert into history_of_price("name", price, "date") VALUES (new.name, new.price, now());
         return NEW;
     END;
 $$
