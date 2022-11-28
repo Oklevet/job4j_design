@@ -37,7 +37,7 @@ public class CSVReader {
 
     public static void printOutFile(String res, String out) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(out, Charset.defaultCharset()))) {
-            if (out.equals("stdout")) {
+            if ("stdout".equals(out)) {
                 System.out.println(res);
             } else {
                 writer.println(res);
