@@ -15,4 +15,5 @@ select sum(price) from sales;
 update sales set price = 100 where name = 'sale1';
 update sales set price = 300 where name = 'sale3';
 
+
 commit;
