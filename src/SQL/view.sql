@@ -54,12 +54,24 @@ where   s.id = o.student_id
         and  b.author_id = a.id
 
 --студенты взявшие книги зарубежных авторов и названия этих книг с принадлежностью к стране.
-create view show_students_with_foreign_books as
+/*create view show_students_with_foreign_books as
     select  s.name student, a.name  author, a.country
     from    authors a, books b, orders o, students s
     where   a.country not like 'РФ'
             and a.id = b.author_id
             and o.book_id = b.id
             and s.id = o.student_id
+*/
+
+drop view show_students_with_foreign_books;
+create view show_students_with_foreign_books as
+    select  s.name student, a.name  author, a.country
+    from    authors a
+            join books b on a.id = b.author_id
+            join orders o on o.book_id = b.id
+            join students s on s.id = o.student_id
+    where   a.country not like 'РФ'
+
+;
 
 select * from show_students_with_foreign_books;
