@@ -14,7 +14,7 @@ public class AppleStore {
 
     public String getLastHappyCustomer() {
         Customer customer = null;
-        if (count == 0 || queue.size() == 0) {
+        if (count == 0) {
             return null;
         }
 
@@ -29,9 +29,6 @@ public class AppleStore {
 
     public String getFirstUpsetCustomer() {
         Customer customer;
-        if (queue.size() == 0) {
-            return null;
-        }
         for (int i = 0; i < count; i++) {
             customer = queue.poll();
             if (queue.peek() == null) {

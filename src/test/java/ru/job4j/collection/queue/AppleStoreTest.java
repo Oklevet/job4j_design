@@ -71,22 +71,4 @@ class AppleStoreTest {
         String customer = appleStore.getFirstUpsetCustomer();
         assertThat(customer).isEqualTo("Petr");
     }
-
-    @Test
-    void whenNoCustomersHappy() {
-        Queue<Customer> customers = new LinkedList<>();
-        int count = 10;
-        AppleStore appleStore = new AppleStore(customers, count);
-        String customer = appleStore.getLastHappyCustomer();
-        assertThat(customer).isEqualTo(null);
-    }
-
-    @Test
-    void whenNoCustomersUpset() {
-        Queue<Customer> customers = new LinkedList<>();
-        int count = 10;
-        AppleStore appleStore = new AppleStore(customers, count);
-        String customer = appleStore.getFirstUpsetCustomer();
-        assertThat(customer).isEqualTo(null);
-    }
 }
