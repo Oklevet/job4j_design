@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 public class AnalyzeByMapTest {
     @Test
     public void whenAverageScore() {
-        double average = AnalyzeByMap.averageScore(
+        double average = AnalyzeByMapStreams.averageScore(
                 List.of(
                         new Pupil("Ivanov",
                                 List.of(
@@ -39,7 +39,7 @@ public class AnalyzeByMapTest {
 
     @Test
     public void whenListOfPupilAverage() {
-        List<Label> average = AnalyzeByMap.averageScoreByPupil(
+        List<Label> average = AnalyzeByMapStreams.averageScoreByPupil(
                 List.of(
                         new Pupil("Ivanov",
                                 List.of(
@@ -77,7 +77,7 @@ public class AnalyzeByMapTest {
     @SuppressWarnings("checkstyle:MissingSwitchDefault")
     @Test
     public void whenListOfSubjectAverage() {
-        List<Label> average = AnalyzeByMap.averageScoreBySubject(
+        List<Label> average = AnalyzeByMapStreams.averageScoreBySubject(
                 List.of(
                         new Pupil("Ivanov",
                                 List.of(
@@ -113,7 +113,7 @@ public class AnalyzeByMapTest {
 
     @Test
     public void whenBestPupil() {
-        Label best = AnalyzeByMap.bestStudent(
+        Label best = AnalyzeByMapStreams.bestStudent(
                 List.of(
                         new Pupil("Ivanov",
                                 List.of(
@@ -144,7 +144,7 @@ public class AnalyzeByMapTest {
 
     @Test
     public void whenBestSubject() {
-        Label best = AnalyzeByMap.bestSubject(
+        Label best = AnalyzeByMapStreams.bestSubject(
                 List.of(
                         new Pupil("Ivanov",
                                 List.of(
