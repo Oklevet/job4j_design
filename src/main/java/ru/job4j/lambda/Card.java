@@ -19,7 +19,10 @@ public class Card {
     }
 
     public static List<Card> makeCardDeck() {
-        return Arrays.stream(Suit.values()).flatMap(x -> Arrays.stream(Value.values()).map(y -> new Card(x, y))).toList();
+        return Arrays.stream(Suit.values())
+                .flatMap(x -> Arrays.stream(Value.values())
+                        .map(y -> new Card(x, y)))
+                .toList();
     }
 
     public static void main(String[] args) {
