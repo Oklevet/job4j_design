@@ -20,7 +20,6 @@ public class Main {
 
         System.out.println();
 
-
         DeliveryAddressMapper deliveryAddressMapper = Mappers.getMapper(DeliveryAddressMapper.class);
         sEntity = new StudentEntity(0, "entity", "junior");
         sDto = new StudentDto(11, "dto", "middle");
