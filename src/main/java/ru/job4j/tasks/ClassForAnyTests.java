@@ -1,5 +1,7 @@
 package ru.job4j.tasks;
 
+import ru.job4j.io.serialization.json.A;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -36,7 +38,7 @@ public class ClassForAnyTests {
 
     }
 
-    static class Model {
+    class Model {
         private int id;
         private List<String> list;
 
