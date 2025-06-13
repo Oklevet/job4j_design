@@ -13,9 +13,10 @@ public class Task1 {
         boolean findDiff = false;
 
         Arrays.stream(strings).forEach(x -> {
-            maxLen.set(Math.max(x.length(), maxLen.get()));});
+            maxLen.set(Math.max(x.length(), maxLen.get()));
+        });
 
-        for(String s : strings) {
+        for (String s : strings) {
             list.add(s.toCharArray());
         }
         for (int i = 0; i < maxLen.get(); i++) {

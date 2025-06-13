@@ -14,7 +14,7 @@ public class SimplePipeline {
         data = source;
     }
 
-    public static SimplePipeline of(Integer ... source) {
+    public static SimplePipeline of(Integer... source) {
         return new SimplePipeline(List.of(source));
     }
 

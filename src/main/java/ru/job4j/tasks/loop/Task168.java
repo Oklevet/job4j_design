@@ -21,7 +21,7 @@ public class Task168 {
     }
 
     public static int getCountDiv(int num) {
-        if (num == 1){
+        if (num == 1) {
             return 1;
         } else if (num == 0) {
             return 0;
@@ -36,7 +36,7 @@ public class Task168 {
         return sum;
     }
 
-    public static int getSumNumbers(String num){
+    public static int getSumNumbers(String num) {
         char[] nums = num.toCharArray();
         int res = 0;
         for (char c : nums) {

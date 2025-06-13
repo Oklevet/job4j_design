@@ -8,7 +8,9 @@ import java.util.stream.Collectors;
 /**
  * Класс, представляющий запись в дневнике студента.
  */
-record DiaryEntry(LocalDate date, String time) {}
+record DiaryEntry(LocalDate date, String time) {
+
+}
 /**
  * Класс, представляющий учебную сессию.
  */

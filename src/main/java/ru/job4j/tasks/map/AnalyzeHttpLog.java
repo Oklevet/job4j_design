@@ -3,7 +3,9 @@ package ru.job4j.tasks.map;
 import java.util.*;
 
 public class AnalyzeHttpLog {
-    public record Line(String level, String thread, String text) {}
+    public record Line(String level, String thread, String text) {
+
+    }
 
     public static Map<String, Long> groupByLevel(List<Line> logs) {
         Map<String, Long> map = new HashMap<>();

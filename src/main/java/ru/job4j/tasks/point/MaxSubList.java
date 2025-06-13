@@ -1,6 +1,8 @@
 package ru.job4j.tasks.point;
 
-record MaxRange(int start, int ent) {}
+record MaxRange(int start, int ent) {
+
+}
 
 public class MaxSubList {
     boolean firstNums = true;
