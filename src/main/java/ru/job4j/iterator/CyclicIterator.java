@@ -20,7 +20,7 @@ public class CyclicIterator<T> implements Iterator<T> {
 
     @Override
     public T next() {
-        if (data.isEmpty()) {
+        if (!hasNext()) {
             throw new NoSuchElementException();
         }
         index++;
