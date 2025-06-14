@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 public class NonNullIterator implements Iterator<Integer> {
 
     private final Integer[] data;
-    private int index = -1;
+    private int index = 0;
 
     public NonNullIterator(Integer[] data) {
         this.data = data;
@@ -14,31 +14,18 @@ public class NonNullIterator implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        return findNextNotNullVal(index + 1) != -1;
+        while (index < data.length && data[index] == null) {
+            index++;
+        }
+        return index < data.length;
     }
 
     @Override
     public Integer next() {
-        int resIdx;
-        index++;
-
-        if (data[index] == null) {
-            resIdx = findNextNotNullVal(++index);
-            if (resIdx == -1) {
-                throw new NoSuchElementException();
-            }
-            index = resIdx;
+        if (!hasNext()) {
+            throw new NoSuchElementException();
         }
-        return data[index];
-    }
-
-    public int findNextNotNullVal(int idx) {
-        for (int i = idx; i < data.length; i++) {
-            if (data[i] != null) {
-                return i;
-            }
-        }
-        return -1;
+        return data[index++];
     }
 
 }
