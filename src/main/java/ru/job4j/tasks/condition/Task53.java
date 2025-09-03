@@ -16,12 +16,16 @@ public class Task53 {
             if (number % 2 == 0) {
                 if (vTemp % 2 == 0 && vTemp >= 0 && vTemp < 9) {
                     sb.append(++vTemp);
-                } else if (vTemp % 2 != 0 && vTemp > 1 && vTemp < 10) {
+                } else if (vTemp % 2 != 0 && vTemp >= 1 && vTemp < 10) {
                     sb.append(--vTemp);
                 } else {
                     sb.append(vTemp);
                 }
             } else {
+                if (vTemp == 9 || vTemp == 0) {
+                    sb.append(vTemp);
+                    continue;
+                }
                 if (vTemp % 2 == 0 && vTemp > 1 && vTemp < 10) {
                     sb.append(--vTemp);
                 } else if (vTemp % 2 != 0 && vTemp >= 0 && vTemp < 9) {
@@ -31,6 +35,25 @@ public class Task53 {
                 }
             }
         }
+        sb = validateZero(String.valueOf(sb));
         System.out.println(sb);
+    }
+
+    public static StringBuilder validateZero(String num) {
+        String str = num;
+        StringBuilder sb = new StringBuilder();
+        Boolean checkStartFrom0 = true;
+
+        for (int i = 0; i < str.length(); i++) {
+            if (!checkStartFrom0) {
+                sb.append(str.charAt(i));
+                continue;
+            }
+            if (str.charAt(i) != '0') {
+                sb.append(str.charAt(i));
+                checkStartFrom0 = false;
+            }
+        }
+        return sb;
     }
 }

@@ -1,30 +1,35 @@
 package ru.job4j.tasks.condition;
 
+import java.util.StringJoiner;
+
 public class Task57 {
     public static void triangleType(int a, int b) {
+        StringJoiner sj = new StringJoiner(" ");
+
         if (a + b >= 180) {
-            System.out.println("Ошибка");
+            sj.add("Ошибка");
         } else {
             if (chkAcute(a, b)) {
-                System.out.println("Остроугольный");
+                sj.add("Остроугольный");
             }
 
             if (chkObtuse(a, b)) {
-                System.out.println("Тупоугольный");
+                sj.add("Тупоугольный");
             }
 
             if (chkRectangular(a, b)) {
-                System.out.println("Прямоугольный");
+                sj.add("Прямоугольный");
             }
 
             if (chkIsosceles(a, b)) {
-                System.out.println("Равнобедренный");
+                sj.add("Равнобедренный");
             }
 
             if (chkEquilateral(a, b)) {
-                System.out.println("Равносторонний");
+                sj.add("Равносторонний");
             }
         }
+        System.out.println(sj);
     }
 
     public static boolean chkAcute(int a, int b) {
