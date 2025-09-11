@@ -12,7 +12,7 @@ public class Task137 {
 
     public static int calcFirstNum(int num) {
         for (int i = 1; i < 10; i++) {
-            if (num - i <= 9){
+            if (num - i <= 9) {
                 return i;
             }
         }
@@ -21,7 +21,7 @@ public class Task137 {
 
     public static int calcLastNum(int num) {
         for (int i = 0; i < 10; i++) {
-            if (num == i){
+            if (num == i) {
                 return i;
             }
         }

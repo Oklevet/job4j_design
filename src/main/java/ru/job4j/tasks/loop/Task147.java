@@ -13,8 +13,9 @@ public class Task147 {
             if (nums.get() - x >= 0) {
                 buyer.addAndGet(1);
                 nums.addAndGet(-x);
-            } else
+            } else {
                 cancel.addAndGet(1);
+            }
         });
         System.out.println("Покупатели: " + buyer.get() + ", отказано: " + cancel.get());
     }

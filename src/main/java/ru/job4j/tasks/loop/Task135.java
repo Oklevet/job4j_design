@@ -5,7 +5,7 @@ public class Task135 {
         String s = String.valueOf(num);
         StringBuilder sb = new StringBuilder();
 
-        for (int i = s.length() - 1; i >= 0 ; i--) {
+        for (int i = s.length() - 1; i >= 0; i--) {
             sb.append(s.charAt(i));
         }
         sb = validateZero(String.valueOf(sb));

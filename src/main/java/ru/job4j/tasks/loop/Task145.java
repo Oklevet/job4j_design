@@ -13,7 +13,7 @@ public class Task145 {
 
         while (Math.sqrt(current) > 1 + num2) {
             current = Math.sqrt(current);
-            sj.add( String.format(Locale.ENGLISH, "%.1f", current));
+            sj.add(String.format(Locale.ENGLISH, "%.1f", current));
             cnt++;
         }
         System.out.println(sj + ", Количество: " + cnt);
