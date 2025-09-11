@@ -8,17 +8,19 @@ public class Task146 {
         int cntHum = 0;
         String res;
 
-        for (int num : nums) {
-            sumWeight = sumWeight + num;
+        for (int i = 0; i < nHuman; i++) {
+            sumWeight = sumWeight + nums[i];
 
             if (sumWeight > 300) {
-                sumWeight = sumWeight - num;
+                sumWeight = sumWeight - nums[i];
                 overWeight = true;
                 break;
             }
 
             if (cntHum == 4) {
-                sumWeight = sumWeight - num;
+                if (!overWeight) {
+                    sumWeight = sumWeight - nums[i];
+                }
                 break;
             }
             cntHum++;

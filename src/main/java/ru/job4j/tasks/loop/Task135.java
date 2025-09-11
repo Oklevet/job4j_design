@@ -5,7 +5,7 @@ public class Task135 {
         String s = String.valueOf(num);
         StringBuilder sb = new StringBuilder();
 
-        for (int i = s.length() - 1; i >= 0; i--) {
+        for (int i = s.length() - 1; i >= 0 ; i--) {
             sb.append(s.charAt(i));
         }
         sb = validateZero(String.valueOf(sb));
@@ -13,16 +13,17 @@ public class Task135 {
     }
 
     public static StringBuilder validateZero(String num) {
+        String str = num;
         StringBuilder sb = new StringBuilder();
-        boolean checkStartFrom0 = true;
+        Boolean checkStartFrom0 = true;
 
-        for (int i = 0; i < num.length(); i++) {
+        for (int i = 0; i < str.length(); i++) {
             if (!checkStartFrom0) {
-                sb.append(num.charAt(i));
+                sb.append(str.charAt(i));
                 continue;
             }
-            if (num.charAt(i) != '0') {
-                sb.append(num.charAt(i));
+            if (str.charAt(i) != '0') {
+                sb.append(str.charAt(i));
                 checkStartFrom0 = false;
             }
         }

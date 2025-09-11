@@ -15,6 +15,6 @@ public class Task149 {
                 break;
             }
         }
-        System.out.printf(Locale.ENGLISH, "%.2f%n", avg / cnt);
+        System.out.println(String.format(Locale.ENGLISH, "%.2f", avg / cnt));
     }
 }

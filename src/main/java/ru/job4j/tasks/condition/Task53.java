@@ -40,16 +40,17 @@ public class Task53 {
     }
 
     public static StringBuilder validateZero(String num) {
+        String str = num;
         StringBuilder sb = new StringBuilder();
-        boolean checkStartFrom0 = true;
+        Boolean checkStartFrom0 = true;
 
-        for (int i = 0; i < num.length(); i++) {
+        for (int i = 0; i < str.length(); i++) {
             if (!checkStartFrom0) {
-                sb.append(num.charAt(i));
+                sb.append(str.charAt(i));
                 continue;
             }
-            if (num.charAt(i) != '0') {
-                sb.append(num.charAt(i));
+            if (str.charAt(i) != '0') {
+                sb.append(str.charAt(i));
                 checkStartFrom0 = false;
             }
         }

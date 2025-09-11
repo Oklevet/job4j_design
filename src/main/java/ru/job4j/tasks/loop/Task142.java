@@ -4,8 +4,12 @@ public class Task142 {
     public static void loop(int num) {
         int n1 = 0;
         int n2 = 1;
-        int nTemp;
-        boolean res = n1 == num;
+        int nTemp = 0;
+        boolean res = false;
+
+        if (n1 == num) {
+            res = true;
+        }
 
         while (n2 <= num) {
 

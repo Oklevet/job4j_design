@@ -7,7 +7,7 @@ public class Task153 {
         StringJoiner sj = new StringJoiner(System.lineSeparator());
 
         int nBull = 0;
-        String line;
+        String line = "";
 
         while (nBull * 10 <= 100) {
             line = "Быков: " + nBull + ", коров: " + ((100 - nBull * 10) / 5);
