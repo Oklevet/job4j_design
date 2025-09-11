@@ -1,9 +1,9 @@
 package ru.job4j.tasks.loop;
 
 public class Task137 {
+
     public static void loop(int num) {
         int n;
-
         n = calcFirstNum(num);
         n = n * 10 + calcLastNum(num - n);
         System.out.println(n);
