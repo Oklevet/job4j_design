@@ -25,6 +25,7 @@ public class AnalyzeHttpLog {
             map.computeIfPresent(line.thread, (k, v) -> v + 1);
             map.putIfAbsent(line.thread, 1);
         }
+
         return map.entrySet()
                 .stream()
                 .max(Map.Entry.comparingByValue(Comparator.comparingInt(Integer::intValue)))
