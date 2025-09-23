@@ -18,8 +18,7 @@ public class Merge {
     private static int[] merge(int[] left, int[] right) {
         int lIndex = 0;
         int rIndex = 0;
-
-        int [] res = new int[left.length + right.length];
+        int[] res = new int[left.length + right.length];
 
         for (int i = 0; i < res.length; i++) {
 
