@@ -21,7 +21,7 @@ public class Main {
 
     public static int[] findMaxOverlapInterval(List<Interval> intervals) {
         if (intervals.isEmpty()) {
-            return new int[] { -1, -1 };
+            return new int[] {-1, -1};
         }
 
         intervals.sort(Comparator.comparingInt(i -> i.start));
@@ -46,11 +46,9 @@ public class Main {
                 int currentLength = currentEnd - currentStart;
                 int bestLength = (bestStart == -1) ? -1 : (bestEnd - bestStart);
 
-                if (currentOverlap > maxOverlap ||
-                        (currentOverlap == maxOverlap &&
-                                (bestStart == -1 ||
-                                        currentLength < bestLength ||
-                                        (currentLength == bestLength && currentStart < bestStart)))) {
+                if (currentOverlap > maxOverlap || (currentOverlap == maxOverlap
+                        && (bestStart == -1 || currentLength < bestLength
+                                || (currentLength == bestLength && currentStart < bestStart)))) {
                     maxOverlap = currentOverlap;
                     bestStart = currentStart;
                     bestEnd = currentEnd;
@@ -58,7 +56,7 @@ public class Main {
             }
         }
 
-        return new int[] { bestStart, bestEnd };
+        return new int[] {bestStart, bestEnd};
     }
 
     public static void main(String[] args) {
